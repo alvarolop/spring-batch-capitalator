@@ -39,3 +39,47 @@ toc::[]
 == Introduction
 
 
+This demo contains all you need to deploy Argo Workflows to coordinate the deployment and execution of batch processes created using Spring Batch. For that reason, this repository contains the following sections:
+
+* First, a quick mechanism to deploy **ArgoCD**. Argo CD automates the deployment of the desired application states in the specified target environments. We will use it to deploy Argo Workflows and our Spring Batch application.
+* Second, **Argo Workflows**. Argo Workflows is a container-native workflow engine for orchestrating parallel jobs on Kubernetes. We will use it to handle the execution of the batch processes.
+* Third, **Spring Batch**. Spring Batch is a processing framework designed for robust execution of jobs. We will use it to load data from a CSV file, process it, and store it in a Database deployed on OpenShift.
+
+All of this will be deployed and automated on OpenShift using the GitOps principles. If you don't have an OpenShift cluster, https://github.com/alvarolop/ocp-installation[check this repo] on how to deploy an OCP cluster on-premise.
+
+
+
+== ArgoCD 
+
+There are many ways to install an ArgoCD instance. Among all of them, I've chosen to use https://docs.openshift.com/gitops/1.11/understanding_openshift_gitops/about-redhat-openshift-gitops.html[Red Hat's OpenShift GitOps]. Red Hat OpenShift GitOps is based on the open source project https://argo-cd.readthedocs.io/en/stable/[Argo CD] and provides a similar set of features to what the upstream offers, with additional automation, integration into Red Hat OpenShift Container Platform and the benefits of Red Hat's enterprise support, quality assurance and focus on enterprise security.
+
+
+The installation of OpenShift GitOps is based on an operator that is installed using the Operator Lifecycle Manager (OLM). To simplify the installation of the operator and the creation of the ArgoCD instance, I've created a simple script that you can run on a clean OCP cluster:
+
+[source, bash]
+----
+./argocd/auto-install.sh
+----
+
+
+
+
+
+
+
+== Argo Workflows
+
+
+
+
+
+== Spring Batch application
+
+
+
+
+
+== Useful resources
+
+
+
