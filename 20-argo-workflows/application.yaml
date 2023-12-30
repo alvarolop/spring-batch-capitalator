@@ -24,9 +24,9 @@ spec:
       chart: argo-workflows
       helm:
         valueFiles:
-        - $values/20-argo-workflows/values.yaml
-    - repoURL: 'https://github.com/alvarolop/spring-batch'
-      targetRevision: dev
+          - $values/20-argo-workflows/values.yaml
+    - repoURL: 'https://github.com/alvarolop/spring-batch.git'
+      targetRevision: main
       ref: values
   project: default
   syncPolicy:
