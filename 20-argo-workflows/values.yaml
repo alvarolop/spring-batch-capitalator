@@ -42,7 +42,7 @@ server:
   # SSO configuration when SSO is specified as a server auth mode.
   sso:
     enabled: true
-    issuer: "https://argocd.gitops.svc.cluster.local/api/dex"
+    issuer: "https://argocd-dex-server.gitops.svc.cluster.local/api/dex"
     # sessionExpiry defines how long your login is valid for in hours. (optional, default: 10h)
     sessionExpiry: 240h
     clientId:
