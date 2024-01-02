@@ -31,8 +31,13 @@ server:
   
   # -- Extra arguments to provide to the Argo server binary.
   ## Ref: https://argoproj.github.io/argo-workflows/argo-server/#options
-  extraArgs:
-    - --auth-mode=sso
+  # extraArgs:
+  #   - --auth-mode=sso
+
+  # -- A list of supported authentication modes. Available values are `server`, `client`, or `sso`. If you provide sso, please configure `.Values.server.sso` as well.
+  ## Ref: https://argoproj.github.io/argo-workflows/argo-server-auth-mode/
+  authModes:
+    - sso
 
   # SSO configuration when SSO is specified as a server auth mode.
   sso:
