@@ -41,18 +41,18 @@ server:
 
   # SSO configuration when SSO is specified as a server auth mode.
   sso:
-    issuer: https://argocd-server-gitops.apps.ocp.sandbox1039.opentlc.com/api/dex
+    issuer: "https://argocd-server-gitops.apps.ocp.sandbox1039.opentlc.com/api/dex"
     # sessionExpiry defines how long your login is valid for in hours. (optional, default: 10h)
     sessionExpiry: 240h
     clientId:
       # -- Name of secret to retrieve the app OIDC client ID
-      name: argo-workflows-sso
+      name: cluster-sso
       # -- Key of secret to retrieve the app OIDC client ID
       key: client-id
     clientSecret:
       # -- Name of a secret to retrieve the app OIDC client secret
-      name: argo-workflows-sso
+      name: cluster-sso
       # -- Key of a secret to retrieve the app OIDC client secret
       key: client-secret
     # - The OIDC redirect URL. Should be in the form <argo-root-url>/oauth2/callback.
-    redirectUrl: https://cluster-argo-workflows.apps.ocp.sandbox1039.opentlc.com//oauth2/callback
+    redirectUrl: "https://cluster-argo-workflows.apps.ocp.sandbox1039.opentlc.com//oauth2/callback"
