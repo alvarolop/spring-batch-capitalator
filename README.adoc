@@ -41,12 +41,13 @@ toc::[]
 
 This demo contains all you need to deploy Argo Workflows to coordinate the deployment and execution of batch processes created using Spring Batch. For that reason, this repository contains the following sections:
 
-* First, a quick mechanism to deploy **ArgoCD**. Argo CD automates the deployment of the desired application states in the specified target environments. We will use it to deploy Argo Workflows and our Spring Batch application.
-* Second, **Argo Workflows**. Argo Workflows is a container-native workflow engine for orchestrating parallel jobs on Kubernetes. We will use it to handle the execution of the batch processes.
-* Third, **Spring Batch**. Spring Batch is a processing framework designed for robust execution of jobs. We will use it to load data from a CSV file, process it, and store it in a Database deployed on OpenShift.
+* First, a quick mechanism to deploy **ArgoCD**. https://argoproj.github.io/cd[Argo CD] automates the deployment of the desired application states in the specified target environments. We will use it to deploy Argo Workflows and our Spring Batch application.
+* Second, **Argo Workflows**. https://argoproj.github.io/workflows[Argo Workflows] is a container-native workflow engine for orchestrating parallel jobs on Kubernetes. We will use it to handle the execution of the batch processes.
+* Third, **Spring Batch**. https://spring.io/projects/spring-batch[Spring Batch] is a processing framework designed for robust execution of jobs. We will use it to load data from a CSV file, process it, and store it in a Database deployed on OpenShift.
 
-All of this will be deployed and automated on OpenShift using the GitOps principles. If you don't have an OpenShift cluster, https://github.com/alvarolop/ocp-installation[check this repo] on how to deploy an OCP cluster on-premise.
+NOTE: All of this will be deployed and automated on OpenShift using the GitOps principles. If you don't have an OpenShift cluster, https://github.com/alvarolop/ocp-installation[check this repo] on how to deploy an OCP cluster on-premise.
 
+TIP: `Data Processing` is one of the https://argoproj.github.io/argo-workflows/use-cases/data-processing/[typical use cases] for Argo Workflows.
 
 
 == ArgoCD 
@@ -58,11 +59,8 @@ The installation of OpenShift GitOps is based on an operator that is installed u
 
 [source, bash]
 ----
-./argocd/auto-install.sh
+./10-argocd/auto-install.sh
 ----
-
-
-
 
 
 
@@ -70,12 +68,30 @@ The installation of OpenShift GitOps is based on an operator that is installed u
 == Argo Workflows
 
 
+There are, also, many official ways to deploy Argo Workflows, all of them on https://argoproj.github.io/argo-workflows/installation/[this page of the documentation]. Apart from the quick-start installation, there are two mechanisms, the single-YAML release manifests and the community-maintained Helm Charts. For this exercise, we are going to use the Helm Charts, as it provides more flexibility and adaptability. Also, we are going to use an ArgoCD application to deploy the chart on OpenShift.
+
+
+[source, bash]
+----
+./20-argo-workflows/auto-install.sh
+----
+
+From the basic Helm Chart provided in their https://github.com/argoproj/argo-helm/tree/main/charts/argo-workflows[GitHub repository], I've also added both a Namespace and a Route to make sure that the resources are not deployed in the `default` namespace.
+
+After that, I have created a modified `values.yaml` to customize the Argo Workflows behavior:
+
+* Provide HA configuration, based on the https://argoproj.github.io/argo-workflows/high-availability/[documentation] and the https://github.com/argoproj/argo-helm/blob/main/charts/argo-workflows/ci/ha-values.yaml[Helm Chart example values].
+* 
+
 
 
 
 == Spring Batch application
 
 
+
+
+== GitHub Actions
 
 
 

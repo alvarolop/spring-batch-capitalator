@@ -1,0 +1,75 @@
+apiVersion: template.openshift.io/v1
+kind: Template
+metadata:
+  name: argo-workflows
+  annotations:
+    description: Template to deploy an Argo Workflows cluster on OCP.
+    tags: argo, workflows,gitops,operator
+    iconClass: icon-git
+    openshift.io/provider-display-name: Red Hat, Inc.
+    openshift.io/support-url: https://access.redhat.com
+objects:
+
+  - apiVersion: project.openshift.io/v1
+    kind: Project
+    metadata:
+      name: ${ARGO_WORKFLOWS_NAMESPACE}
+      annotations:
+        openshift.io/description: "This project contains all the resources related to Argo Workflows"
+        openshift.io/display-name: "Argo Workflows"
+      labels:
+        openshift.io/cluster-monitoring: "true"
+
+  - apiVersion: argoproj.io/v1alpha1
+    kind: Application
+    metadata:
+      name: ${ARGO_WORKFLOWS_NAME}
+      namespace: gitops
+    spec:
+      destination:
+        server: 'https://kubernetes.default.svc'
+        namespace: ${ARGO_WORKFLOWS_NAMESPACE}
+      sources:
+        - repoURL: 'https://argoproj.github.io/argo-helm'
+          targetRevision: 0.40.3
+          chart: argo-workflows
+          helm:
+            valueFiles:
+              - $values/20-argo-workflows/values.yaml
+        - repoURL: 'https://github.com/alvarolop/spring-batch.git'
+          targetRevision: main
+          ref: values
+      project: default
+      syncPolicy:
+        automated:
+          prune: false
+          selfHeal: false
+        syncOptions:
+          - CreateNamespace=true
+          # - ServerSideApply=true
+
+  - kind: Route
+    apiVersion: route.openshift.io/v1
+    metadata:
+      name: ${ARGO_WORKFLOWS_NAME}
+      namespace: ${ARGO_WORKFLOWS_NAMESPACE}
+    spec:
+      to:
+        kind: Service
+        name: ${ARGO_WORKFLOWS_NAME}-argo-workflows-server
+        weight: 100
+      port:
+        targetPort: 2746
+      tls:
+        termination: edge
+      wildcardPolicy: None
+
+parameters:
+- name: ARGO_WORKFLOWS_NAMESPACE
+  description: "The project where the cluster will be installed."
+  required: false
+  value: "argo-workflows"
+- name: ARGO_WORKFLOWS_NAME
+  description: "The name of the Argo Workflows cluster."
+  required: false
+  value: "cluster"
