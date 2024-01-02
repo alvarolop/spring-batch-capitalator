@@ -55,7 +55,9 @@ ARGOCD_ROUTE=$(oc get routes $ARGOCD_CLUSTER_NAME-server -n $ARGOCD_NAMESPACE --
 # Create the ArgoCD ConsoleLink
 echo -e "\n[3/3]Create the ArgoCD ConsoleLink"
 oc process -f https://raw.githubusercontent.com/alvarolop/ocp-gitops-playground/main/openshift/03-consolelink.yaml \
-    -p ARGOCD_ROUTE=$ARGOCD_ROUTE | oc apply -f -
+    -p ARGOCD_ROUTE=$ARGOCD_ROUTE \
+    -p ARGOCD_NAMESPACE=$ARGOCD_NAMESPACE \
+    -p ARGOCD_CLUSTER_NAME="$ARGOCD_CLUSTER_NAME" | oc apply -f -
 
 echo ""
 echo -e "OpenShift GitOps information:"
