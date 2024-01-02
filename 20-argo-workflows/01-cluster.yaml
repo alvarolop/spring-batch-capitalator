@@ -56,7 +56,7 @@ objects:
     spec:
       to:
         kind: Service
-        name: ${ARGO_WORKFLOWS_NAME}-argo-workflows-server
+        name: ${ARGO_WORKFLOWS_NAMESPACE}-server
         weight: 100
       port:
         targetPort: 2746
