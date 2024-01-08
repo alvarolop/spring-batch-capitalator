@@ -37,7 +37,7 @@ objects:
           helm:
             valueFiles:
               - $values/20-argo-workflows/values.yaml
-        - repoURL: 'https://github.com/alvarolop/spring-batch.git'
+        - repoURL: 'https://github.com/alvarolop/spring-batch-capitalator.git'
           targetRevision: main
           ref: values
       project: default
