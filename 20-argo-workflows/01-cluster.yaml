@@ -18,13 +18,14 @@ objects:
         openshift.io/description: "This project contains all the resources related to Argo Workflows"
         openshift.io/display-name: "Argo Workflows"
       labels:
-        openshift.io/cluster-monitoring: "true"
+        openshift.io/cluster-monitoring: "false"
+        openshift.io/user-monitoring: "true"
 
   - apiVersion: argoproj.io/v1alpha1
     kind: Application
     metadata:
       name: ${ARGO_WORKFLOWS_NAME}
-      namespace: gitops
+      namespace: ${ARGOCD_NAMESPACE}
     spec:
       destination:
         server: 'https://kubernetes.default.svc'
@@ -52,7 +53,7 @@ objects:
     apiVersion: route.openshift.io/v1
     metadata:
       name: ${ARGO_WORKFLOWS_NAME}
-      namespace: ${ARGO_WORKFLOWS_NAMESPACE}
+      namespace: 
     spec:
       to:
         kind: Service
@@ -63,6 +64,27 @@ objects:
       tls:
         termination: edge
       wildcardPolicy: None
+  
+  - kind: Secret
+    apiVersion: v1
+    metadata:
+      name: argo-workflows-sso
+      namespace: ${ARGO_WORKFLOWS_NAMESPACE}
+    type: Opaque
+    stringData:
+      client-id: "${ARGO_CD_CLIENT_ID}"
+      client-secret: "${ARGO_CD_CLIENT_SECRET}"
+    
+
+  - kind: Secret
+    apiVersion: v1
+    metadata:
+      name: argo-workflows-sso
+      namespace: ${ARGOCD_NAMESPACE}
+    type: Opaque
+    stringData:
+      client-id: "${ARGO_CD_CLIENT_ID}"
+      client-secret: "${ARGO_CD_CLIENT_SECRET}"
 
 parameters:
 - name: ARGO_WORKFLOWS_NAMESPACE
@@ -73,3 +95,14 @@ parameters:
   description: "The name of the Argo Workflows cluster."
   required: false
   value: "cluster"
+- name: ARGOCD_NAMESPACE
+  description: "The project where the cluster will be installed."
+  required: false
+  value: "argo-workflows"
+- name: ARGO_CD_CLIENT_ID
+  description: "The name of the Argo Workflows cluster."
+  required: false
+  value: "system:serviceaccount:gitops:argocd-argocd-dex-server"
+- name: ARGO_CD_CLIENT_SECRET
+  description: "The name of the Argo Workflows cluster."
+  required: true
