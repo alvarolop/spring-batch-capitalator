@@ -53,7 +53,7 @@ objects:
     apiVersion: route.openshift.io/v1
     metadata:
       name: ${ARGO_WORKFLOWS_NAME}
-      namespace: 
+      namespace: ${ARGO_WORKFLOWS_NAMESPACE}
     spec:
       to:
         kind: Service
