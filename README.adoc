@@ -87,11 +87,22 @@ After that, I have created a modified `values.yaml` to customize the Argo Workfl
 NOTE: For general info, I recommend this guide about https://blog.argoproj.io/practical-argo-workflows-hardening-dd8429acc1ce[Argo Workflows Hardening].
 
 
+
+
+
 == Spring Batch application
 
+The Spring Batch application dubbed *Capitalator* is just a demo application from the https://spring.io/guides/gs/batch-processing/[official guides], which has been adapted to the needs of this demo use case:
 
-Manual steps to generate the container image locally:
+* New name of the application.
+* Exposing metrics using `micrometer` (Still WIP).
+* Option to connect to an external PostgreSQL deployed in another OCP namespace, instead of in-memory HyperSQL DB) (Still WIP).
 
+NOTE: If you are not interested in manual push, just continue to the next section.
+
+A simple Dockerfile is stored in `src/main/docker/Dockerfile.springboot-jar`, and you can manually generate and push the container image to Quay with the following manual steps:
+
+.Generate container image locally
 [source, bash]
 ----
 # Generate the Jar file with all the dependencies
@@ -104,9 +115,9 @@ podman build -f src/main/docker/Dockerfile.springboot-jar -t spring-boot/spring-
 podman run -i --rm spring-boot/spring-batch-capitalator
 ----
 
-=== Push image to Quay
+Then, push the image to Quay using the following commands (Previously login to Quay with an authorized account):
 
-
+.Push image to Quay
 [source, bash]
 ----
 # Tag the image to point to your Quay URL
@@ -118,11 +129,25 @@ podman push quay.io/alopezme/spring-batch-capitalator
 
 
 
+
 == GitHub Actions
+
+As we don't want to manually execute commands to generate and push a container image, I have automated the Build and Push process with a GH Workflow that is triggered every time a new commit is pushed and affects one of the files of the application itself.
+
+Also, if a new git tag in `semver` format is pushed, it will generate an extra image using that tag as a container tag to the Quay repo.
+
+For this to work, it is necessary to create a Robot Account in Quay with write permissions and create the following two secrets in the Git repository:
+
+* *QUAY_REPO_TOKEN*.
+* *QUAY_REPO_USERNAME*.
+
 
 
 
 == PostgreSQL Database
+
+
+
 
 
 
