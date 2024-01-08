@@ -1,0 +1,44 @@
+---
+kind: CronJob
+apiVersion: batch/v1
+metadata:
+  name: capitalator
+  namespace: spring-batch
+spec:                          
+  # ┌───────────── minute (0–59)
+  # │ ┌───────────── hour (0–23)
+  # │ │ ┌───────────── day of the month (1–31)
+  # │ │ │ ┌───────────── month (1–12)
+  # │ │ │ │ ┌───────────── day of the week (0–6) (Sunday to Saturday;
+  # │ │ │ │ │                                   7 is also Sunday on some systems)
+  # │ │ │ │ │
+  # │ │ │ │ │                                                      
+  schedule: "*/1 * * * *"                                                           
+  concurrencyPolicy: Forbid
+  jobTemplate:
+    metadata:
+      labels:
+        app: capitalator
+    spec:
+      backoffLimit: 0
+      ttlSecondsAfterFinished: 1800                                                  
+      template:
+        metadata:
+          labels:
+            app: capitalator
+        spec:
+          containers:
+            - name: capitalator
+              image: "quay.io/alopezme/spring-batch-capitalator:latest"
+              securityContext:
+                allowPrivilegeEscalation: false
+                runAsNonRoot: true
+                seccompProfile:
+                  type: RuntimeDefault
+                capabilities:
+                  drop:
+                  - ALL                                               
+          restartPolicy: "Never"
+          terminationGracePeriodSeconds: 30
+          activeDeadlineSeconds: 500
+          dnsPolicy: "ClusterFirst"
