@@ -90,9 +90,40 @@ NOTE: For general info, I recommend this guide about https://blog.argoproj.io/pr
 == Spring Batch application
 
 
+Manual steps to generate the container image locally:
+
+[source, bash]
+----
+# Generate the Jar file with all the dependencies
+mvn clean package
+
+# Add the executable to a container image
+podman build -f src/main/docker/Dockerfile.springboot-jar -t spring-boot/spring-batch-capitalator .
+
+# Launch the application
+podman run -i --rm spring-boot/spring-batch-capitalator
+----
+
+=== Push image to Quay
+
+
+[source, bash]
+----
+# Tag the image to point to your Quay URL
+podman tag spring-boot/spring-batch-capitalator quay.io/alopezme/spring-batch-capitalator
+
+# Push image to Quay
+podman push quay.io/alopezme/spring-batch-capitalator
+----
+
 
 
 == GitHub Actions
+
+
+
+== PostgreSQL Database
+
 
 
 
