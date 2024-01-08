@@ -81,9 +81,10 @@ From the basic Helm Chart provided in their https://github.com/argoproj/argo-hel
 After that, I have created a modified `values.yaml` to customize the Argo Workflows behavior:
 
 * Provide HA configuration, based on the https://argoproj.github.io/argo-workflows/high-availability/[documentation] and the https://github.com/argoproj/argo-helm/blob/main/charts/argo-workflows/ci/ha-values.yaml[Helm Chart example values].
-* 
+* Expose metrics and collect them using a ServiceMonitor according to the https://argoproj.github.io/argo-workflows/metrics/[documentation]. The Helm chart already takes care of that in these https://github.com/argoproj/argo-helm/blob/main/charts/argo-workflows/ci/enable-metrics-values.yaml[example values].
 
 
+NOTE: For general info, I recommend this guide about https://blog.argoproj.io/practical-argo-workflows-hardening-dd8429acc1ce[Argo Workflows Hardening].
 
 
 == Spring Batch application
