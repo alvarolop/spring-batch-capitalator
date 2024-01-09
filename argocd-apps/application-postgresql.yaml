@@ -8,7 +8,7 @@ spec:
   destination:
     server: 'https://kubernetes.default.svc'
   source:
-    path: 31-postgresql/openshift
+    path: 31-postgresql
     repoURL: https://github.com/alvarolop/spring-batch-capitalator.git
     targetRevision: main
   project: default
