@@ -57,7 +57,7 @@ objects:
     spec:
       to:
         kind: Service
-        name: ${ARGO_WORKFLOWS_NAMESPACE}-server
+        name: ${ARGO_WORKFLOWS_NAME}-${ARGO_WORKFLOWS_NAMESPACE}-server
         weight: 100
       port:
         targetPort: 2746
@@ -74,17 +74,139 @@ objects:
     stringData:
       client-id: "${ARGO_CD_CLIENT_ID}"
       client-secret: "${ARGO_CD_CLIENT_SECRET}"
-    
 
-  - kind: Secret
-    apiVersion: v1
+
+  - apiVersion: argoproj.io/v1beta1
+    kind: ArgoCD
     metadata:
-      name: argo-workflows-sso
-      namespace: ${ARGOCD_NAMESPACE}
-    type: Opaque
-    stringData:
-      client-id: "${ARGO_CD_CLIENT_ID}"
-      client-secret: "${ARGO_CD_CLIENT_SECRET}"
+      name: ${ARGOCD_CLUSTER_NAME}
+      namespace: ${ARGO_WORKFLOWS_NAMESPACE}
+    spec:
+      server:
+        autoscale:
+          enabled: false
+        grpc:
+          ingress:
+            enabled: false
+        ingress:
+          enabled: false
+        resources:
+          limits:
+            cpu: 500m
+            memory: 256Mi
+          requests:
+            cpu: 125m
+            memory: 128Mi
+        route:
+          enabled: true
+        service:
+          type: ''
+      grafana:
+        enabled: false
+        ingress:
+          enabled: false
+        resources:
+          limits:
+            cpu: 500m
+            memory: 256Mi
+          requests:
+            cpu: 250m
+            memory: 128Mi
+        route:
+          enabled: false
+      monitoring:
+        enabled: false
+      notifications:
+        enabled: false
+      prometheus:
+        enabled: false
+        ingress:
+          enabled: false
+        route:
+          enabled: false
+      initialSSHKnownHosts: {}
+      sso:
+        provider: dex
+        dex:
+          config: |
+            staticClients:
+            - id: argo-workflows-sso
+              name: Argo Workflow
+              redirectURIs:
+                - https://cluster-argo-workflows.apps.ocp.sandbox2972.opentlc.com/oauth2/callback
+              secretEnv: ARGO_WORKFLOWS_SSO_CLIENT_SECRET
+          env:
+            - name: ARGO_WORKFLOWS_SSO_CLIENT_SECRET
+              valueFrom:
+                secretKeyRef:
+                  name: argo-workflows-sso
+                  key: client-secret
+      applicationSet:
+        resources:
+          limits:
+            cpu: '2'
+            memory: 1Gi
+          requests:
+            cpu: 250m
+            memory: 512Mi
+        webhookServer:
+          ingress:
+            enabled: false
+          route:
+            enabled: false
+      rbac:
+        defaultPolicy: ''
+        policy: |
+          g, system:cluster-admins, role:admin
+          g, cluster-admins, role:admin
+        scopes: '[groups]'
+      disableAdmin: true
+      # usersAnonymousEnabled: true
+      repo:
+        resources:
+          limits:
+            cpu: '1'
+            memory: 1Gi
+          requests:
+            cpu: 250m
+            memory: 256Mi
+      resourceExclusions: |
+        - apiGroups:
+          - tekton.dev
+          clusters:
+          - '*'
+          kinds:
+          - TaskRun
+          - PipelineRun
+      ha:
+        enabled: false
+        resources:
+          limits:
+            cpu: 500m
+            memory: 256Mi
+          requests:
+            cpu: 250m
+            memory: 128Mi
+      tls:
+        ca: {}
+      redis:
+        resources:
+          limits:
+            cpu: 500m
+            memory: 256Mi
+          requests:
+            cpu: 250m
+            memory: 128Mi
+      controller:
+        processors: {}
+        resources:
+          limits:
+            cpu: '2'
+            memory: 2Gi
+          requests:
+            cpu: 250m
+            memory: 1Gi
+        sharding: {}
 
 parameters:
 - name: ARGO_WORKFLOWS_NAMESPACE
@@ -98,11 +220,16 @@ parameters:
 - name: ARGOCD_NAMESPACE
   description: "The project where the cluster will be installed."
   required: false
-  value: "argo-workflows"
+  value: "gitops"
+- name: ARGOCD_CLUSTER_NAME
+  description: "The name of the ArgoCD cluster."
+  required: false
+  value: "argocd"
 - name: ARGO_CD_CLIENT_ID
   description: "The name of the Argo Workflows cluster."
   required: false
-  value: "system:serviceaccount:gitops:argocd-argocd-dex-server"
+  value: "argo-workflows-sso"
 - name: ARGO_CD_CLIENT_SECRET
   description: "The name of the Argo Workflows cluster."
-  required: true
+  required: false
+  value: "MY-SECRET-STRING-CAN-BE-UUID"

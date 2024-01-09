@@ -34,8 +34,8 @@ else
 fi
 
 # Get Secret values
-ARGO_CD_CLIENT_ID="system:serviceaccount:$ARGOCD_NAMESPACE:$ARGOCD_CLUSTER_NAME-argocd-dex-server"
-ARGO_CD_CLIENT_SECRET=$(oc get secrets/argocd-secret -n gitops -o go-template --template='{{ index .data "oidc.dex.clientSecret" | base64decode}}')
+# ="system:serviceaccount:$ARGOCD_NAMESPACE:$ARGOCD_CLUSTER_NAME-argocd-dex-server"
+# ARGO_CD_CLIENT_SECRET=$(oc get secrets/argocd-secret -n gitops -o go-template --template='{{ index .data "oidc.dex.clientSecret" | base64decode}}')
 
 
 # Deploy the Argo Workflows instance
@@ -43,9 +43,7 @@ echo -e "\n[1/2]Deploy the Argo Workflows instance"
 oc process -f 20-argo-workflows/01-cluster.yaml \
     -p ARGO_WORKFLOWS_NAMESPACE=$ARGO_WORKFLOWS_NAMESPACE \
     -p ARGO_WORKFLOWS_NAME="$ARGO_WORKFLOWS_NAME" \
-    -p ARGOCD_NAMESPACE=$ARGOCD_NAMESPACE \
-    -p ARGO_CD_CLIENT_ID=$ARGO_CD_CLIENT_ID \
-    -p ARGO_CD_CLIENT_SECRET=$ARGO_CD_CLIENT_SECRET | oc apply -f -
+    -p ARGOCD_NAMESPACE=$ARGOCD_NAMESPACE | oc apply -f -
 
 # Wait for DeploymentConfig
 echo -n "Waiting for pods ready..."
@@ -62,11 +60,11 @@ oc process -f 20-argo-workflows/02-consolelink.yaml \
     -p ARGO_WORKFLOWS_NAME="$ARGO_WORKFLOWS_NAME" | oc apply -f -
 
 
-# Deploy the ArgoCD instance
-echo -e "\n[3/3]Deploy the ArgoCD instance for DEX"
-oc process -f 20-argo-workflows/03-argocd.yaml \
-    -p ARGOCD_NAMESPACE=$ARGO_WORKFLOWS_NAMESPACE \
-    -p ARGOCD_CLUSTER_NAME="argocd" | oc apply -f -
+# # Deploy the ArgoCD instance
+# echo -e "\n[3/3]Deploy the ArgoCD instance for DEX"
+# oc process -f 20-argo-workflows/03-argocd.yaml \
+#     -p ARGOCD_NAMESPACE=$ARGO_WORKFLOWS_NAMESPACE \
+#     -p ARGOCD_CLUSTER_NAME="argocd" | oc apply -f -
 
 echo ""
 echo -e "Argo Workflows information:"
