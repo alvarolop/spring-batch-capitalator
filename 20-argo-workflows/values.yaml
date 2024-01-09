@@ -40,6 +40,19 @@ controller:
   telemetryConfig:
     enabled: true  
 
+  # -- Default values that will apply to all Workflows from this controller, unless overridden on the Workflow-level.
+  # Only valid for 2.7+
+  ## See more: https://argo-workflows.readthedocs.io/en/latest/default-workflow-specs/
+  workflowDefaults:
+    spec:
+      serviceAccountName: argo-workflow
+  #     ttlStrategy:
+  #       secondsAfterCompletion: 84600
+  #     # Ref: https://argoproj.github.io/argo-workflows/artifact-repository-ref/
+  #     artifactRepositoryRef:
+  #       configMap: my-artifact-repository # default is "artifact-repositories"
+  #       key: v2-s3-artifact-repository # default can be set by the `workflows.argoproj.io/default-artifact-repository` annotation in config map.
+
 server:
   # enable HPA with at least two Pods
   autoscaling:
