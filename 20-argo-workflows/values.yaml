@@ -1,4 +1,28 @@
+workflow:
+  serviceAccount:
+    # -- Specifies whether a service account should be created
+    create: true
+    # -- Service account which is used to run workflows
+    name: "argo-workflow"
+  rbac:
+    # -- Adds Role and RoleBinding for the above specified service account to be able to run workflows.
+    # A Role and Rolebinding pair is also created for each namespace in controller.workflowNamespaces (see below)
+    create: true
+
+# -- Restrict Argo to operate only in a single namespace (the namespace of the
+# Helm release) by apply Roles and RoleBindings instead of the Cluster
+# equivalents, and start workflow-controller with the --namespaced flag. Use it
+# in clusters with strict access policy.
+# singleNamespace: false
+
 controller:
+
+  # -- Specify all namespaces where this workflow controller instance will manage
+  # workflows. This controls where the service account and RBAC resources will
+  # be created. Only valid when singleNamespace is false.
+  # workflowNamespaces:
+  #   - default
+
   # in v3.0+, a second controller can be ran as a hot-standby: https://argoproj.github.io/argo-workflows/high-availability/#workflow-controller
   replicas: 2 # should be strictly greater than PDB minAvailable
   # enable PDB with at least one Pod
