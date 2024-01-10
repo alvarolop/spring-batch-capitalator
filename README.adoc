@@ -100,9 +100,12 @@ The Spring Batch application dubbed *Capitalator* is just a demo application fro
 
 NOTE: If you are not interested in manual push, just continue to the next section.
 
+
+=== Generate container image locally
+
 A simple Dockerfile is stored in `src/main/docker/Dockerfile.springboot-jar`, and you can manually generate and push the container image to Quay with the following manual steps:
 
-.Generate container image locally
+
 [source, bash]
 ----
 # Generate the Jar file with all the dependencies
@@ -115,9 +118,11 @@ podman build -f src/main/docker/Dockerfile.springboot-jar -t spring-boot/spring-
 podman run -i --rm spring-boot/spring-batch-capitalator
 ----
 
+
+=== Push image to Quay
+
 Then, push the image to Quay using the following commands (Previously login to Quay with an authorized account):
 
-.Push image to Quay
 [source, bash]
 ----
 # Tag the image to point to your Quay URL
@@ -127,10 +132,7 @@ podman tag spring-boot/spring-batch-capitalator quay.io/alopezme/spring-batch-ca
 podman push quay.io/alopezme/spring-batch-capitalator
 ----
 
-
-
-
-== GitHub Actions
+=== Extra: GitHub Actions
 
 As we don't want to manually execute commands to generate and push a container image, I have automated the Build and Push process with a GH Workflow that is triggered every time a new commit is pushed and affects one of the files of the application itself.
 
@@ -142,9 +144,38 @@ For this to work, it is necessary to create a Robot Account in Quay with write p
 * *QUAY_REPO_USERNAME*.
 
 
+=== Deploy to OpenShift without Argo Workflows
+
+If you don't need any Batch Processing Orchestration, 
+
+[source, bash]
+----
+# ArgoCD application
+oc apply -f argocd-apps/application-capitalator.yaml
+
+# Apply resources directly
+oc apply -f 30-postgresql/
+----
+
+
+
+
 
 
 == PostgreSQL Database
+
+To make the Spring Batch Capitalator example more similar to a real use case, this repository also provides a simple mechanism to deploy a `postgresql` database on a side namespace, so that Capitalator can connect and store the uppercase version of the names. You can deploy the DB either creating an ArgoCD application or applying the resources directly:
+
+[source, bash]
+----
+# ArgoCD application
+oc apply -f argocd-apps/application-postgresql.yaml
+
+# Apply resources directly
+oc apply -f 31-postgresql/
+----
+
+
 
 
 

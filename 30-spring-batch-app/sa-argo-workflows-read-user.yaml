@@ -17,7 +17,8 @@ metadata:
   namespace: argo-workflows
   annotations:
     workflows.argoproj.io/rbac-rule: "'system:authenticated' in groups"
-    workflows.argoproj.io/rbac-rule-precedence: "10"
+    workflows.argoproj.io/rbac-rule-precedence: "0"
 # automountServiceAccountToken: true
 secrets:
   - name: argo-workflows-read-user-token
+
