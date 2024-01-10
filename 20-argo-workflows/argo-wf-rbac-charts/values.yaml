@@ -5,7 +5,7 @@ serviceAccounts:
   - name: user-default-login
     tokenName: user-default-login
     isClusterRB: true
-    role: cluster-argo-workflows-view
+    clusterRole: cluster-argo-workflows-view
     rbacRule: true
     rbacPrecedence: 0
     
