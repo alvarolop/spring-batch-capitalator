@@ -13,15 +13,16 @@ workflow:
 # Helm release) by apply Roles and RoleBindings instead of the Cluster
 # equivalents, and start workflow-controller with the --namespaced flag. Use it
 # in clusters with strict access policy.
-# singleNamespace: false
+singleNamespace: false
 
 controller:
 
   # -- Specify all namespaces where this workflow controller instance will manage
   # workflows. This controls where the service account and RBAC resources will
   # be created. Only valid when singleNamespace is false.
-  # workflowNamespaces:
-  #   - default
+  workflowNamespaces:
+    - argo-workflows
+    - spring-batch
 
   # in v3.0+, a second controller can be ran as a hot-standby: https://argoproj.github.io/argo-workflows/high-availability/#workflow-controller
   replicas: 2 # should be strictly greater than PDB minAvailable
@@ -41,17 +42,10 @@ controller:
     enabled: true  
 
   # -- Default values that will apply to all Workflows from this controller, unless overridden on the Workflow-level.
-  # Only valid for 2.7+
   ## See more: https://argo-workflows.readthedocs.io/en/latest/default-workflow-specs/
   workflowDefaults:
     spec:
       serviceAccountName: argo-workflow
-  #     ttlStrategy:
-  #       secondsAfterCompletion: 84600
-  #     # Ref: https://argoproj.github.io/argo-workflows/artifact-repository-ref/
-  #     artifactRepositoryRef:
-  #       configMap: my-artifact-repository # default is "artifact-repositories"
-  #       key: v2-s3-artifact-repository # default can be set by the `workflows.argoproj.io/default-artifact-repository` annotation in config map.
 
 server:
   # enable HPA with at least two Pods
