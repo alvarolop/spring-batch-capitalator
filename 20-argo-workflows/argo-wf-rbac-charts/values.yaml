@@ -1,0 +1,21 @@
+default:
+  saNamespace: argo-workflows
+
+serviceAccounts:
+  - name: user-default-login
+    tokenName: user-default-login
+    isClusterRB: true
+    isClusterRole: true
+    role: view
+    rbacRule: true
+    rbacPrecedence: 0
+    
+# the name of the roles should be updated to correspond with the argo workflows deployment
+  # - name: argo-workflows-admin-sa
+  #   namespace: argo-workflows
+  #   tokenName: argo-workflows-admin-sa-token
+  #   isClusterRole: false
+  #   role: argo-workflows-admin
+  #   rbacRule: "'cluster-admins' in groups"
+  #   rbacPrecedence: 10
+  #   automount: true
