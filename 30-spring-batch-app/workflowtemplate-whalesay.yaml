@@ -4,6 +4,9 @@ kind: ClusterWorkflowTemplate
 metadata:
   name: whalesay-hello-world-template
 spec:
+  workflowMetadata:
+    labels:
+      template-name: whalesay-hello-world
 
   entrypoint: whalesay
 
