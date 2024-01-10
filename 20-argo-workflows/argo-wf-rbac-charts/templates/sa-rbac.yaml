@@ -17,7 +17,7 @@ roleRef:
   kind: Role
   {{- end }}
 subjects:
-  - kind: ServiceAccount
-    name: {{ $sa.name }}
-    namespace: {{ $sa.namespace | default $.Values.default.saNamespace }}
+- kind: ServiceAccount
+  name: {{ $sa.name }}
+  namespace: {{ $sa.namespace | default $.Values.default.saNamespace }}
 {{- end }}

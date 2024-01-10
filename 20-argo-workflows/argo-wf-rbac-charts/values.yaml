@@ -11,11 +11,11 @@ serviceAccounts:
     rbacPrecedence: 0
     
 # the name of the roles should be updated to correspond with the argo workflows deployment
-  # - name: argo-workflows-admin-sa
-  #   namespace: argo-workflows
-  #   tokenName: argo-workflows-admin-sa-token
-  #   isClusterRole: false
-  #   role: argo-workflows-admin
-  #   rbacRule: "'cluster-admins' in groups"
-  #   rbacPrecedence: 10
-  #   automount: true
+  - name: app1-admin-sa
+    tokenName: argo-workflows-admin-sa-token
+    isClusterRB: false
+    isClusterRole: false
+    role: app1-admin
+    rbacRule: "'app1-team' in groups"
+    rbacPrecedence: 10
+    managedNamespace: app1
