@@ -13,8 +13,7 @@ serviceAccounts:
   - name: app1-admin-sa
     tokenName: argo-workflows-admin-sa-token
     isClusterRB: false
-    isClusterRole: false
-    role: app1-admin
+    clusterRole: app1-admin
     rbacRule: "'app1-team' in groups"
     rbacPrecedence: 10
     managedNamespace: app1
