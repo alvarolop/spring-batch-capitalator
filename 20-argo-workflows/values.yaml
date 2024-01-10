@@ -90,4 +90,11 @@ server:
     # - The OIDC redirect URL. Should be in the form <argo-root-url>/oauth2/callback.
     redirectUrl: "https://cluster-argo-workflows.apps.ocp.sandbox2972.opentlc.com/oauth2/callback"
     # -- Skip TLS verification for the HTTP client
+    rbac:
+      # -- Adds ServiceAccount Policy to server (Cluster)Role.
+      enabled: true
+    # -- Scopes requested from the SSO ID provider
+    ## The 'groups' scope requests group membership information, which is usually used for authorization decisions.
+    scopes:
+      - groups
     insecureSkipVerify: true
