@@ -18,4 +18,4 @@ serviceAccounts:
     rbacRule: "'app1-team' in groups"
     rbacPrecedence: 10
     managedNamespace: app1
-    namespace: app1
+    # namespace: app1
