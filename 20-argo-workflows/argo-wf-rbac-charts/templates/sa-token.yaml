@@ -1,0 +1,13 @@
+{{- range $sa := $.Values.serviceAccounts }}
+---
+# https://github.com/argoproj/argo-workflows/discussions/9496
+# https://github.com/argoproj/argo-workflows/issues/8320
+apiVersion: v1
+kind: Secret
+metadata:
+  name: {{ $sa.tokenName }}
+  namespace: {{ $sa.namespace | default $.Values.default.saNamespace }}
+  annotations:
+    kubernetes.io/service-account.name: {{ $sa.name }}
+type: kubernetes.io/service-account-token
+{{- end }}
