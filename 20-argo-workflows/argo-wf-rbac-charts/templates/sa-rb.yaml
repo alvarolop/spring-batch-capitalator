@@ -6,11 +6,12 @@ metadata:
   name: {{ $sa.name }}-rb
   namespace: {{ $sa.managedNamespace }}
 roleRef:
-  name: {{ $sa.role }}
   apiGroup: rbac.authorization.k8s.io
-  {{- if $sa.isClusterRole }}
+  {{- if $sa.clusterRole }}
+  name: {{ $sa.clusterRole }}
   kind: ClusterRole
-  {{- else }}
+  {{- else -}}
+  name: {{ $sa.role }}
   kind: Role
   {{- end }}
 subjects:
