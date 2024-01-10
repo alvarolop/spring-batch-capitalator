@@ -1,23 +1,17 @@
 {{- range $sa := $.Values.serviceAccounts }}
-apiVersion: rbac.authorization.k8s.io/v1
 {{- if $sa.isClusterRB }}
+apiVersion: rbac.authorization.k8s.io/v1
 kind: ClusterRoleBinding
-{{- else }}
-kind: RoleBinding
-{{- end }}
-metadata:
-  name: {{ $sa.role }}
-  namespace: {{ $sa.managedNamespace }}
+metadata: 
+  name: {{ $sa.name }}-crb
 roleRef:
   name: {{ $sa.role }}
   apiGroup: rbac.authorization.k8s.io
-  {{- if $sa.isClusterRole }}
   kind: ClusterRole
-  {{- else }}
-  kind: Role
-  {{- end }}
 subjects:
 - kind: ServiceAccount
   name: {{ $sa.name }}
   namespace: {{ $sa.namespace | default $.Values.default.saNamespace }}
 {{- end }}
+{{- end }}
+

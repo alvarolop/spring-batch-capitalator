@@ -5,7 +5,6 @@ serviceAccounts:
   - name: user-default-login
     tokenName: user-default-login
     isClusterRB: true
-    isClusterRole: true
     role: view
     rbacRule: true
     rbacPrecedence: 0
@@ -19,3 +18,4 @@ serviceAccounts:
     rbacRule: "'app1-team' in groups"
     rbacPrecedence: 10
     managedNamespace: app1
+    namespace: app1
