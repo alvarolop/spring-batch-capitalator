@@ -65,6 +65,7 @@ objects:
         termination: edge
       wildcardPolicy: None
   
+
   - kind: Secret
     apiVersion: v1
     metadata:
@@ -128,10 +129,22 @@ objects:
       sso:
         provider: dex
         dex:
+          openShiftOAuth: true
           config: |
+            connectors:
+            - config:
+                clientID: system:serviceaccount:argo-workflows:argocd-argocd-dex-server
+                clientSecret: $oidc.dex.clientSecret
+                groups: []
+                insecureCA: true
+                issuer: https://kubernetes.default.svc
+                redirectURI: https://argocd-server-argo-workflows.apps.ocp.sandbox2972.opentlc.com/api/dex/callback
+              id: openshift
+              name: OpenShift
+              type: openshift
             staticClients:
-            - id: argo-workflows-sso
-              name: Argo Workflow
+            - idEnv: ARGO_WORKFLOWS_SSO_CLIENT_ID
+              name: "Argo Workflow"
               redirectURIs:
                 - https://cluster-argo-workflows.apps.ocp.sandbox2972.opentlc.com/oauth2/callback
               secretEnv: ARGO_WORKFLOWS_SSO_CLIENT_SECRET
@@ -141,6 +154,11 @@ objects:
                 secretKeyRef:
                   name: argo-workflows-sso
                   key: client-secret
+            - name: ARGO_WORKFLOWS_SSO_CLIENT_ID
+              valueFrom:
+                secretKeyRef:
+                  name: argo-workflows-sso
+                  key: client-id
       applicationSet:
         resources:
           limits:

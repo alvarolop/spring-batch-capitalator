@@ -46,6 +46,7 @@ controller:
   workflowDefaults:
     spec:
       serviceAccountName: argo-workflow
+      
 
 server:
   # enable HPA with at least two Pods
