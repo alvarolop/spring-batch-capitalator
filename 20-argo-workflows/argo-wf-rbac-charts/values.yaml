@@ -5,16 +5,16 @@ serviceAccounts:
   - name: user-default-login
     tokenName: user-default-login
     isClusterRB: true
-    role: view
+    role: cluster-argo-workflows-view
     rbacRule: true
     rbacPrecedence: 0
     
 # the name of the roles should be updated to correspond with the argo workflows deployment
-  - name: app1-admin-sa
-    tokenName: argo-workflows-admin-sa-token
-    isClusterRB: false
-    clusterRole: app1-admin
-    rbacRule: "'app1-team' in groups"
+  - name: batch-app-01-admin
+    tokenName: batch-app-01-admin-token
+    isClusterRB: true
+    clusterRole: cluster-argo-workflows-admin
+    rbacRule: "'app-01-team' in groups"
     rbacPrecedence: 10
-    managedNamespace: app1
+    managedNamespace: batch-app-01
     # namespace: app1
