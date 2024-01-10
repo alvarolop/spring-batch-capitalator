@@ -1,0 +1,23 @@
+---
+# https://github.com/argoproj/argo-workflows/discussions/9496
+# https://github.com/argoproj/argo-workflows/issues/8320
+apiVersion: v1
+kind: Secret
+metadata:
+  name: argo-workflows-read-user-token
+  namespace: argo-workflows
+  annotations:
+    kubernetes.io/service-account.name: argo-workflows-read-user
+type: kubernetes.io/service-account-token
+---
+apiVersion: v1
+kind: ServiceAccount
+metadata:
+  name: argo-workflows-read-user
+  namespace: argo-workflows
+  annotations:
+    workflows.argoproj.io/rbac-rule: "'system:authenticated' in groups"
+    workflows.argoproj.io/rbac-rule-precedence: "10"
+# automountServiceAccountToken: true
+secrets:
+  - name: argo-workflows-read-user-token
