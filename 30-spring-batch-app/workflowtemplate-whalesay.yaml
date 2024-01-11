@@ -4,11 +4,12 @@ kind: ClusterWorkflowTemplate
 metadata:
   name: whalesay-hello-world-template
 spec:
+
   workflowMetadata:
     labels:
       template-name: whalesay-hello-world
 
-  entrypoint: whalesay
+  entrypoint: entry
 
   templates:
   - name: whalesay
@@ -20,3 +21,25 @@ spec:
       image: docker.io/docker/whalesay
       command: [cowsay]
       args: ["{{inputs.parameters.message}}"]
+  - name: entry
+    dag:
+      tasks:
+      - name: A
+        template: echo
+        arguments:
+          parameters: [{name: message, value: "This is step A"}]
+      - name: B
+        dependencies: [A]
+        template: echo
+        arguments:
+          parameters: [{name: message, value: "This is step B"}]
+      - name: C
+        dependencies: [A]
+        template: echo
+        arguments:
+          parameters: [{name: message, value: "This is step C"}]
+      - name: D
+        dependencies: [B, C]
+        template: echo
+        arguments:
+          parameters: [{name: message, value: "This is step D"}]
