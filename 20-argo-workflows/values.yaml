@@ -22,7 +22,6 @@ controller:
   # be created. Only valid when singleNamespace is false.
   workflowNamespaces:
     - argo-workflows
-    - spring-batch
     - batch-app-01
     - batch-app-02
 
@@ -101,3 +100,68 @@ server:
     scopes:
       - groups
     insecureSkipVerify: true
+
+# -- Array of extra K8s manifests to deploy
+extraObjects:
+  - apiVersion: v1
+    kind: Namespace
+    metadata:
+      annotations:
+        openshift.io/description: "This project contains all the Argo Workflows resources"
+        openshift.io/display-name: "Argo Workflows"
+      labels:
+        argocd.argoproj.io/managed-by: gitops
+      name: argo-workflows
+  - apiVersion: v1
+    kind: Namespace
+    metadata:
+      annotations:
+        openshift.io/description: "This project contains workflows related to the Batch App 01"
+        openshift.io/display-name: "Batch App 01"
+      labels:
+        argocd.argoproj.io/managed-by: gitops
+      name: batch-app-01
+  - apiVersion: v1
+    kind: Namespace
+    metadata:
+      annotations:
+        openshift.io/description: "This project contains workflows related to the Batch App 02"
+        openshift.io/display-name: "Batch App 02"
+      labels:
+        argocd.argoproj.io/managed-by: gitops
+      name: batch-app-02
+  - kind: Route
+    apiVersion: route.openshift.io/v1
+    metadata:
+      name: cluster
+      namespace: argo-workflows
+    spec:
+      to:
+        kind: Service
+        name: cluster-argo-workflows-server
+        weight: 100
+      port:
+        targetPort: 2746
+      tls:
+        termination: edge
+      wildcardPolicy: None
+  - kind: Secret
+    apiVersion: v1
+    metadata:
+      name: argo-workflows-sso
+      namespace: argo-workflows
+    type: Opaque
+    stringData:
+      client-id: "argo-workflows-sso"
+      client-secret: "MY-SECRET-STRING-CAN-BE-UUID"
+  - apiVersion: console.openshift.io/v1
+    kind: ConsoleLink
+    metadata:
+      name: argo-workflows-argo-workflows
+    spec:
+      href: https://cluster-argo-workflows.apps.ocp.sandbox2972.opentlc.com
+      location: ApplicationMenu
+      text: Argo Workflows
+      applicationMenu:
+        section: GitOps
+        imageURL: https://raw.githubusercontent.com/argoproj/argo-workflows/main/docs/assets/logo.png

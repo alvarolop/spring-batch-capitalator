@@ -42,7 +42,7 @@ while [[ $(oc get pods -l control-plane=gitops-operator -n $OPERATOR_NAMESPACE -
 
 # Deploy the ArgoCD instance
 echo -e "\n[2/3]Deploy the ArgoCD instance"
-oc process -f https://raw.githubusercontent.com/alvarolop/ocp-gitops-playground/main/openshift/02-argocd.yaml \
+oc process -f 10-argocd/02-argocd.yaml \
     -p ARGOCD_NAMESPACE=$ARGOCD_NAMESPACE \
     -p ARGOCD_CLUSTER_NAME="$ARGOCD_CLUSTER_NAME" | oc apply -f -
 
