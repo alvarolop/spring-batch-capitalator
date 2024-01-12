@@ -1,0 +1,12 @@
+---
+apiVersion: console.openshift.io/v1
+kind: ConsoleLink
+metadata:
+  name: {{ $.Values.global.name }}-{{ $.Values.global.namespace }}
+spec:
+  href: https://{{ $.Values.global.name }}-{{ $.Values.global.namespace }}.{{ $.Values.global.ocp.baseUrl }}
+  location: ApplicationMenu
+  text: Argo Workflows
+  applicationMenu:
+    section: GitOps
+    imageURL: https://raw.githubusercontent.com/argoproj/argo-workflows/main/docs/assets/logo.png

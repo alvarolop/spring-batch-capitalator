@@ -1,0 +1,17 @@
+{{- range $rbac := $.Values.rbac }}
+{{- if $rbac.clusterWide }}
+---
+apiVersion: rbac.authorization.k8s.io/v1
+kind: ClusterRoleBinding
+metadata:
+  name: {{ $.Values.global.name }}-argo-workflows-{{ $rbac.role }}-{{ $rbac.group }}
+roleRef:
+  name: {{ $.Values.global.name }}-argo-workflows-{{ $rbac.role }}
+  apiGroup: rbac.authorization.k8s.io
+  kind: ClusterRole
+subjects:
+- kind: ServiceAccount
+  name: {{ $.Values.global.name }}-{{ $rbac.group }}
+  namespace: {{ $.Values.global.namespace }}
+{{- end }}
+{{- end }}
