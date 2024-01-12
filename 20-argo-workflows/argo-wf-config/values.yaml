@@ -32,7 +32,7 @@ rbac:
 
 
 argo-workflows:
-  enabled: false
+  enabled: true
   workflow:
     serviceAccount:
       # -- Specifies whether a service account should be created
