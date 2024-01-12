@@ -149,7 +149,7 @@ objects:
             - idEnv: ARGO_WORKFLOWS_SSO_CLIENT_ID
               name: "Argo Workflows"
               redirectURIs:
-                - https://cluster-argo-workflows.${OCP_ROUTE_SUFFIX}/oauth2/callback
+                - https://argowf-argo-workflows.${OCP_ROUTE_SUFFIX}/oauth2/callback
               secretEnv: ARGO_WORKFLOWS_SSO_CLIENT_SECRET
           env:
             - name: ARGO_WORKFLOWS_SSO_CLIENT_SECRET
