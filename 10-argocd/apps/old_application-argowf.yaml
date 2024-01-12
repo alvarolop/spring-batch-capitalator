@@ -1,0 +1,29 @@
+---
+apiVersion: argoproj.io/v1alpha1
+kind: Application
+metadata:
+  name: argowf
+  namespace: gitops
+spec:
+  destination:
+    server: 'https://kubernetes.default.svc'
+    namespace: argo-workflows
+  sources:
+    - repoURL: 'https://argoproj.github.io/argo-helm'
+      targetRevision: 0.40.5
+      chart: argo-workflows
+      helm:
+        valueFiles:
+          - $values/20-argo-workflows/values.yaml
+    - repoURL: 'https://github.com/alvarolop/spring-batch-capitalator.git'
+      targetRevision: main
+      ref: values
+  project: default
+  syncPolicy:
+    automated:
+      prune: false
+      selfHeal: false
+    syncOptions:
+      - CreateNamespace=true
+      # - ServerSideApply=true
+...
