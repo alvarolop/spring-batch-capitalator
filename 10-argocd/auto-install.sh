@@ -59,6 +59,9 @@ oc process -f https://raw.githubusercontent.com/alvarolop/ocp-gitops-playground/
     -p ARGOCD_NAMESPACE=$ARGOCD_NAMESPACE \
     -p ARGOCD_CLUSTER_NAME="$ARGOCD_CLUSTER_NAME" | oc apply -f -
 
+# Create the Argo Workflows applications
+oc apply -f 10-argocd/apps
+
 echo ""
 echo -e "OpenShift GitOps information:"
 echo -e "\t* URL: $ARGOCD_ROUTE"

@@ -9,7 +9,7 @@ spec:
     server: 'https://kubernetes.default.svc'
     namespace: argo-workflows
   source:
-    path: 20-argo-workflows/argo-wf-config
+    path: ./20-argo-workflows/argo-wf-config
     repoURL: https://github.com/alvarolop/spring-batch-capitalator.git
     targetRevision: main
   project: default
