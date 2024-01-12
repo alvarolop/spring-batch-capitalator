@@ -2,14 +2,13 @@
 apiVersion: argoproj.io/v1alpha1
 kind: Application
 metadata:
-  name: argowf
+  name: capitalator-cronjob
   namespace: gitops
 spec:
   destination:
     server: 'https://kubernetes.default.svc'
-    namespace: argo-workflows
   source:
-    path: ./20-argo-workflows/argo-wf-config
+    path: capitalator-cronjob
     repoURL: https://github.com/alvarolop/spring-batch-capitalator.git
     targetRevision: main
   project: default

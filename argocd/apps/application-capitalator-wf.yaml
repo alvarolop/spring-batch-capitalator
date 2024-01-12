@@ -1,0 +1,19 @@
+---
+apiVersion: argoproj.io/v1alpha1
+kind: Application
+metadata:
+  name: capitalator-wf
+  namespace: gitops
+spec:
+  destination:
+    server: 'https://kubernetes.default.svc'
+  source:
+    path: capitalator-wf
+    repoURL: https://github.com/alvarolop/spring-batch-capitalator.git
+    targetRevision: main
+  project: default
+  syncPolicy:
+    automated:
+      prune: false
+      selfHeal: false
+...
