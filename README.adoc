@@ -99,6 +99,20 @@ As there are some settings not included in the default Helm Chart, I have define
 NOTE: For general info, I recommend this guide about https://blog.argoproj.io/practical-argo-workflows-hardening-dd8429acc1ce[Argo Workflows Hardening].
 
 
+The Argo Workflows server will be deployed and configured automatically once you execute the `./argocd/auto-install.sh` command of the previous section. If you already have an ArgoCD that want to reuse, you can also execute the following command:
+
+[source, bash]
+----
+oc apply -f argocd/apps/application-argowf.yaml
+----
+
+The application is split into several Helm Charts for reusability and maintainability. The following diagram shows the dependencies:
+
+
+.GitOps Architecture
+image::gitops-architecture.png["GitOps Architecture"]
+
+
 
 
 
