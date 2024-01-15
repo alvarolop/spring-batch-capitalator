@@ -12,6 +12,11 @@ spec:
     path: argo-workflows/argo-wf-config
     repoURL: https://github.com/alvarolop/spring-batch-capitalator.git
     targetRevision: main
+    helm:
+      valueFiles:
+        - values.yaml
+        - values-argowf.yaml
+        - values-dex.yaml
   project: default
   syncPolicy:
     automated:

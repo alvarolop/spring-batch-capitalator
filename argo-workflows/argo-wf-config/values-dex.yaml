@@ -1,0 +1,100 @@
+dex:
+  enabled: true
+  name: dex
+  replicaCount: 1
+
+  commonLabels: 
+    app.kubernetes.io/part-of: argo-workflows
+
+  image:
+    repository: ghcr.io/dexidp/dex
+    pullPolicy: IfNotPresent
+
+  https:
+    enabled: false
+
+  grpc:
+    enabled: true
+
+  configSecret:
+    create: true
+    name: "dex-server-config"
+
+  envVars:
+    - name: DEX_OAUTH_CLIENT_SECRET
+      valueFrom:
+        secretKeyRef: 
+          name: dex-sa-token
+          key: token
+          
+    # - name: ARGO_WORKFLOWS_CLIENT_ID
+    #   valueFrom:
+    #     secretKeyRef: 
+    #       name: "argo-workflows-sso"
+    #       key: "client-id"
+
+    - name: ARGO_WORKFLOWS_CLIENT_SECRET
+      valueFrom:
+        secretKeyRef: 
+          name: "argo-workflows-sso"
+          key: "client-secret"
+
+  config:
+    issuer: https://dex-argo-workflows.apps.ocp.sandbox2972.opentlc.com/api/dex
+    storage:
+      type: memory
+    web:
+      http: "0.0.0.0:5556"
+    grpc:
+      addr: "0.0.0.0:5557"
+    oauth2:
+      skipApprovalScreen: true
+    staticClients:
+      - id: argo-workflows-sso
+        name: argo-workflows
+        secret: $ARGO_WORKFLOWS_CLIENT_SECRET
+        redirectURIs:
+          - https://argowf-argo-workflows.apps.ocp.sandbox2972.opentlc.com/oauth2/callback
+    connectors:
+      - type: openshift
+        id: openshift
+        name: OpenShift
+        config:
+          issuer: https://kubernetes.default.svc
+          clientID: system:serviceaccount:argo-workflows:dex
+          clientSecret: $DEX_OAUTH_CLIENT_SECRET
+          insecureCA: true
+          groups: []
+          redirectURI: https://dex-argo-workflows.apps.ocp.sandbox2972.opentlc.com/api/dex/callback
+
+  serviceAccount:
+    create: false
+
+  rbac:
+    create: true
+    createClusterScoped: true
+
+  podSecurityContext: 
+    # capabilities:
+    #     drop:
+    #       - ALL
+    runAsNonRoot: true
+    # allowPrivilegeEscalation: false
+
+  securityContext: 
+    seccompProfile:
+      type: RuntimeDefault
+
+  resources: 
+    limits:
+      cpu: 500m
+      memory: 256Mi
+    requests:
+      cpu: 500m
+      memory: 256Mi
+
+  strategy:
+    type: RollingUpdate
+    rollingUpdate:
+      maxUnavailable: 25%
+      maxSurge: 25%
