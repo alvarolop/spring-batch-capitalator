@@ -1,14 +1,15 @@
+---
 apiVersion: route.openshift.io/v1
 kind: Route
 metadata:
-  name: {{ $.Values.dex.name }}-route
+  name: {{ $.Values.dex.name }}
   namespace: {{ $.Values.dex.namespace | default $.Values.global.namespace }}
 spec:
   port:
     targetPort: 5556
   to:
     kind: Service
-    name: {{ $.Values.dex.name }}
+    name: {{ $.Values.global.name }}-{{ $.Values.dex.name }}
   tls:
     termination: edge
   wildcardPolicy: None
