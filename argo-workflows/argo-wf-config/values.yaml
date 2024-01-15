@@ -32,7 +32,7 @@ rbac:
 
 
 argo-workflows:
-  enabled: false
+  enabled: true
   workflow:
     serviceAccount:
       # -- Specifies whether a service account should be created
@@ -111,7 +111,7 @@ argo-workflows:
     # SSO configuration when SSO is specified as a server auth mode.
     sso:
       enabled: true
-      issuer: https://argocd-server-gitops.apps.ocp.sandbox2972.opentlc.com/api/dex
+      issuer: https://dex-argo-workflows.apps.ocp.sandbox2972.opentlc.com/api/dex
       # sessionExpiry defines how long your login is valid for in hours. (optional, default: 10h)
       sessionExpiry: 240h
       clientId:
@@ -168,10 +168,36 @@ dex:
     - name: ARGO_WORKFLOWS_CLIENT_SECRET
       valueFrom:
         secretKeyRef: 
-          name: ""
-          key: ""
+          name: "argo-workflows-sso"
+          key: "client-secret"
 
-  config: {}
+  config:
+    issuer: https://dex-argo-workflows.apps.ocp.sandbox2972.opentlc.com/api/dex
+    storage:
+      type: memory
+    web:
+      http: "0.0.0.0:5556"
+    grpc:
+      addr: "0.0.0.0:5557"
+    oauth2:
+      skipApprovalScreen: true
+    staticClients:
+      - id: argo-workflows
+        name: argo-workflows
+        secret: $ARGO_WORKFLOWS_CLIENT_SECRET
+        redirectURIs:
+          - https://argowf-argo-workflows.apps.ocp.sandbox2972.opentlc.com/oauth2/callback
+    connectors:
+      - type: openshift
+        id: openshift
+        name: OpenShift
+        config:
+          issuer: https://kubernetes.default.svc
+          clientID: system:serviceaccount:argo-workflows:dex
+          clientSecret: $DEX_OAUTH_CLIENT_SECRET
+          insecureCA: true
+          groups: []
+          redirectURI: https://dex-argo-workflows.apps.ocp.sandbox2972.opentlc.com/api/dex/callback
 
   serviceAccount:
     create: false
