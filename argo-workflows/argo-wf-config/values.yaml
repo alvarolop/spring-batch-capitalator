@@ -164,6 +164,12 @@ dex:
         secretKeyRef: 
           name: dex-sa-token
           key: token
+          
+    - name: ARGO_WORKFLOWS_CLIENT_SECRET
+      valueFrom:
+        secretKeyRef: 
+          name: ""
+          key: ""
 
   config: {}
 
