@@ -1,6 +1,6 @@
 global:
   name: argowf
-  namespace: argo-workflows
+  namespace: alvaro
   ocp:
     baseUrl: "apps.ocp.sandbox2972.opentlc.com"
   createNamespaces:
@@ -56,7 +56,7 @@ argo-workflows:
     # workflows. This controls where the service account and RBAC resources will
     # be created. Only valid when singleNamespace is false.
     workflowNamespaces:
-      - argo-workflows
+      - alvaro
       - app01-workflows
       - app02-workflows
 
