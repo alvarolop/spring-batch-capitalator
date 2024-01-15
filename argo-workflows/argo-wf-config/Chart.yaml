@@ -27,3 +27,7 @@ dependencies:
   version: 0.40.5
   repository: https://argoproj.github.io/argo-helm
   condition: argo-workflows.enabled
+- name: dex
+  version: 0.15.3
+  repository: https://charts.dexidp.io
+  condition: dex.enabled
