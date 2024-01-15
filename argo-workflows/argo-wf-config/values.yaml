@@ -32,7 +32,7 @@ rbac:
 
 
 argo-workflows:
-  enabled: true
+  enabled: false
   workflow:
     serviceAccount:
       # -- Specifies whether a service account should be created
@@ -135,3 +135,66 @@ argo-workflows:
       scopes:
         - groups
       insecureSkipVerify: true
+
+dex:
+  enabled: true
+  name: dex
+  replicaCount: 1
+
+  commonLabels: 
+    app.kubernetes.io/part-of: argo-workflows
+
+  image:
+    repository: ghcr.io/dexidp/dex
+    pullPolicy: IfNotPresent
+
+  https:
+    enabled: false
+
+  grpc:
+    enabled: true
+
+  configSecret:
+    create: true
+    name: "dex-server-config"
+
+  envVars:
+    - name: DEX_OAUTH_CLIENT_SECRET
+      valueFrom:
+        secretKeyRef: 
+          name: dex-sa-token
+          key: token
+
+  config: {}
+
+  serviceAccount:
+    create: false
+
+  rbac:
+    create: true
+    createClusterScoped: true
+
+  podSecurityContext: 
+    # capabilities:
+    #     drop:
+    #       - ALL
+    runAsNonRoot: true
+    # allowPrivilegeEscalation: false
+
+  securityContext: 
+    seccompProfile:
+      type: RuntimeDefault
+
+  resources: 
+    limits:
+      cpu: 500m
+      memory: 256Mi
+    requests:
+      cpu: 500m
+      memory: 256Mi
+
+  strategy:
+    type: RollingUpdate
+    rollingUpdate:
+      maxUnavailable: 25%
+      maxSurge: 25%
