@@ -188,9 +188,9 @@ dex:
     oauth2:
       skipApprovalScreen: true
     staticClients:
-      - id: $ARGO_WORKFLOWS_CLIENT_ID
+      - idEnv: ARGO_WORKFLOWS_CLIENT_ID
         name: argo-workflows
-        secret: $ARGO_WORKFLOWS_CLIENT_SECRET
+        secretEnv: ARGO_WORKFLOWS_CLIENT_SECRET
         redirectURIs:
           - https://argowf-argo-workflows.apps.ocp.sandbox2972.opentlc.com/oauth2/callback
     connectors:
