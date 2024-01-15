@@ -165,11 +165,11 @@ dex:
           name: dex-sa-token
           key: token
           
-    - name: ARGO_WORKFLOWS_CLIENT_ID
-      valueFrom:
-        secretKeyRef: 
-          name: "argo-workflows-sso"
-          key: "client-id"
+    # - name: ARGO_WORKFLOWS_CLIENT_ID
+    #   valueFrom:
+    #     secretKeyRef: 
+    #       name: "argo-workflows-sso"
+    #       key: "client-id"
 
     - name: ARGO_WORKFLOWS_CLIENT_SECRET
       valueFrom:
@@ -188,9 +188,9 @@ dex:
     oauth2:
       skipApprovalScreen: true
     staticClients:
-      - idEnv: ARGO_WORKFLOWS_CLIENT_ID
+      - id: argo-workflows-sso
         name: argo-workflows
-        secretEnv: ARGO_WORKFLOWS_CLIENT_SECRET
+        secret: $ARGO_WORKFLOWS_CLIENT_SECRET
         redirectURIs:
           - https://argowf-argo-workflows.apps.ocp.sandbox2972.opentlc.com/oauth2/callback
     connectors:
