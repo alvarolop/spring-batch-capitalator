@@ -4,7 +4,7 @@
 apiVersion: rbac.authorization.k8s.io/v1
 kind: ClusterRoleBinding
 metadata:
-  name: {{ $.Values.global.name }}-argo-workflows-{{ $rbac.role }}-{{ $rbac.group }}
+  name: {{ $.Values.global.name }}-{{ $.Values.global.namespace }}-{{ $rbac.role }}-{{ $rbac.group }}
 roleRef:
   name: {{ $.Values.global.name }}-argo-workflows-{{ $rbac.role }}
   apiGroup: rbac.authorization.k8s.io

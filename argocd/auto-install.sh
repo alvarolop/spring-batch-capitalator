@@ -42,7 +42,7 @@ while [[ $(oc get pods -l control-plane=gitops-operator -n $OPERATOR_NAMESPACE -
 
 # Deploy the ArgoCD instance
 echo -e "\n[2/3]Deploy the ArgoCD instance"
-oc process -f 10-argocd/02-argocd.yaml \
+oc process -f argocd/02-argocd.yaml \
     -p ARGOCD_NAMESPACE=$ARGOCD_NAMESPACE \
     -p ARGOCD_CLUSTER_NAME="$ARGOCD_CLUSTER_NAME" | oc apply -f -
 
@@ -60,7 +60,7 @@ oc process -f https://raw.githubusercontent.com/alvarolop/ocp-gitops-playground/
     -p ARGOCD_CLUSTER_NAME="$ARGOCD_CLUSTER_NAME" | oc apply -f -
 
 # Create the Argo Workflows applications
-oc apply -f 10-argocd/apps
+oc apply -f argocd/apps
 
 echo ""
 echo -e "OpenShift GitOps information:"

@@ -1,8 +1,8 @@
 global:
   name: argowf
-  namespace: alvaro
+  namespace: argo-workflows
   ocp:
-    baseUrl: "apps.ocp.sandbox2972.opentlc.com"
+    baseUrl: apps.ocp.sandbox2972.opentlc.com
   createNamespaces:
     - app01-workflows
     - app02-workflows
@@ -56,7 +56,7 @@ argo-workflows:
     # workflows. This controls where the service account and RBAC resources will
     # be created. Only valid when singleNamespace is false.
     workflowNamespaces:
-      - alvaro
+      - argo-workflows
       - app01-workflows
       - app02-workflows
 
@@ -111,7 +111,7 @@ argo-workflows:
     # SSO configuration when SSO is specified as a server auth mode.
     sso:
       enabled: true
-      issuer: "https://argocd-server-gitops.apps.ocp.sandbox2972.opentlc.com/api/dex"
+      issuer: https://argocd-server-gitops.apps.ocp.sandbox2972.opentlc.com/api/dex
       # sessionExpiry defines how long your login is valid for in hours. (optional, default: 10h)
       sessionExpiry: 240h
       clientId:
@@ -125,7 +125,7 @@ argo-workflows:
         # -- Key of a secret to retrieve the app OIDC client secret
         key: client-secret
       # - The OIDC redirect URL. Should be in the form <argo-wf-root-url>/oauth2/callback.
-      redirectUrl: "https://argowf-argo-workflows.apps.ocp.sandbox2972.opentlc.com/oauth2/callback"
+      redirectUrl: https://argowf-argo-workflows.apps.ocp.sandbox2972.opentlc.com/oauth2/callback
       # -- Skip TLS verification for the HTTP client
       rbac:
         # -- Adds ServiceAccount Policy to server (Cluster)Role.
