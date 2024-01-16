@@ -52,7 +52,7 @@ dex:
     staticClients:
       - id: argo-workflows-sso
         name: argo-workflows
-        secret: $ARGO_WORKFLOWS_CLIENT_SECRET
+        secretEnv: ARGO_WORKFLOWS_CLIENT_SECRET
         redirectURIs:
           - https://argowf-argo-workflows.apps.ocp.sandbox2972.opentlc.com/oauth2/callback
     connectors:
