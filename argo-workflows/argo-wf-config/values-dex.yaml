@@ -70,6 +70,8 @@ dex:
   serviceAccount:
     create: false
 
+  serviceAccountName: dex
+
   rbac:
     create: true
     createClusterScoped: true
