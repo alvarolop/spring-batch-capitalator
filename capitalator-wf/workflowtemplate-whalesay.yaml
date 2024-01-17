@@ -34,12 +34,12 @@ spec:
         arguments:
           parameters: [{name: message, value: "This is step B"}]
       - name: C
-        dependencies: [A]
+        dependencies: [B]
         template: whalesay
         arguments:
           parameters: [{name: message, value: "This is step C"}]
       - name: D
-        dependencies: [B, C]
+        dependencies: [C]
         template: whalesay
         arguments:
           parameters: [{name: message, value: "This is step D"}]
