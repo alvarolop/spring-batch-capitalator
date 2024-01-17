@@ -74,6 +74,7 @@ argo-workflows:
     authModes:
       # - server # This is to disable authentication
       - sso # To delegate auth on DEX server
+      - client # To enable REST API auth with Bearer Token
 
     # SSO configuration when SSO is specified as a server auth mode.
     sso:
