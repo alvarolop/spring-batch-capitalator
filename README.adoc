@@ -79,7 +79,7 @@ There are, also, many official ways to deploy Argo Workflows, all of them on htt
 
 From the basic Helm Chart provided in their https://github.com/argoproj/argo-helm/tree/main/charts/argo-workflows[GitHub repository], I've also added both a Namespace and a Route to make sure that the resources are not deployed in the `default` namespace.
 
-I have created a modified `values.yaml` to customize the Argo Workflows behavior:
+I have created a modified `values-*.yaml` to customize the Argo Workflows behavior:
 
 * Provide HA configuration, based on the https://argoproj.github.io/argo-workflows/high-availability/[documentation] and the https://github.com/argoproj/argo-helm/blob/main/charts/argo-workflows/ci/ha-values.yaml[Helm Chart example values].
 * Expose metrics and collect them using a ServiceMonitor according to the https://argoproj.github.io/argo-workflows/metrics/[documentation]. The Helm chart already takes care of that in these https://github.com/argoproj/argo-helm/blob/main/charts/argo-workflows/ci/enable-metrics-values.yaml[example values].
@@ -93,7 +93,7 @@ As there are some settings not included in the default Helm Chart, I have define
 * A default namespace to install the server.
 * A Route to expose the server, the OCP way.
 * A ConsoleLink to simplify accessing the Argo Workflows cluster every time.
-* All the resources to deploy a local instance of the DEX server (Still WIP).
+* All the resources to deploy a local instance of the DEX server.
 
 
 NOTE: For general info, I recommend this guide about https://blog.argoproj.io/practical-argo-workflows-hardening-dd8429acc1ce[Argo Workflows Hardening].
@@ -211,7 +211,25 @@ oc apply -f db-postgresql/
 
 
 
-== Useful resources
+== Argo Workflows Architecture
+
+
+=== RBAC
+
+
+=== Metrics
+
+Argo emits a certain number of controller metrics that inform on the state of the controller at any given time. Then you can configure a Grafana Dashboard to easily control those. I already enabled metrics by default in the current `values-argowf.yaml`, so the official Helm Chart already creates a ServiceMonitor to collect metrics using the OCP Monitoring operator. 
+
+Then, regarding the metrics visualization, I've explored the available Dashboards in `grafana.com` and added these two to the chart:
+
+* https://grafana.com/grafana/dashboards/13927-argoworkflow-metrics/?src=worldping_rt[ArgoWorkflow Metrics].
+* https://grafana.com/grafana/dashboards/14136-argo-metrics/[Argo Metrics].
+
+
+TIP: For a full comprehensive explanation of Argo Workflows metrics, you can check the https://argo-workflows.readthedocs.io/en/latest/metrics/[official documentation].
+
+
 
 
 

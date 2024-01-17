@@ -6,6 +6,20 @@ global:
   createNamespaces:
     - app01-workflows
     - app02-workflows
+  
+grafana:
+  name: grafana
+  namespace: grafana
+  app: argo-workflows
+  dashboards:
+
+    - name: argo-metrics
+      folder: "Argo Workflows"
+      path: "dashboards/ARGO-Metrics.json"
+      
+    - name: argoworkflow-metrics
+      folder: "Argo Workflows"
+      path: "dashboards/ArgoWorkflow-metrics.json"
 
 rbac:
   # Users will be assigned ONLY one SA based on the first rule that matches the groups of the user.
