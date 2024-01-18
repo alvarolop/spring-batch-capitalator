@@ -1,0 +1,526 @@
+{
+    "_type": "export",
+    "__export_format": 4,
+    "__export_date": "2024-01-18T12:33:21.961Z",
+    "__export_source": "insomnia.desktop.app:v2023.5.8",
+    "resources": [
+        {
+            "_id": "req_db79cc804ede40ed9c2f7326b7b11656",
+            "parentId": "wrk_41670f0b9c834c0a8c7588266505aacd",
+            "modified": 1705580509112,
+            "created": 1705573423234,
+            "url": "{{ _.argo_url }}/api/v1/events/{{ _.argowf_namespace }}/whalesay-cluster",
+            "name": "Event WF - Cluster",
+            "description": "",
+            "method": "POST",
+            "body": {
+                "mimeType": "application/json",
+                "text": "{\n\t\"message\": \"hello events\"\n}"
+            },
+            "parameters": [
+                {
+                    "id": "pair_28a3d6f588af451d9839d1452a601f51",
+                    "name": "",
+                    "value": "",
+                    "description": ""
+                }
+            ],
+            "headers": [
+                {
+                    "name": "Content-Type",
+                    "value": "application/json"
+                },
+                {
+                    "name": "User-Agent",
+                    "value": "insomnia/2023.5.8"
+                }
+            ],
+            "authentication": {
+                "type": "bearer",
+                "token": "{{ _.argo_token }}"
+            },
+            "metaSortKey": -1705573423234,
+            "isPrivate": false,
+            "settingStoreCookies": true,
+            "settingSendCookies": true,
+            "settingDisableRenderRequestBody": false,
+            "settingEncodeUrl": true,
+            "settingRebuildPath": true,
+            "settingFollowRedirects": "global",
+            "_type": "request"
+        },
+        {
+            "_id": "wrk_41670f0b9c834c0a8c7588266505aacd",
+            "parentId": null,
+            "modified": 1705572948496,
+            "created": 1705572948496,
+            "name": "Argo WF Alvaro",
+            "description": "",
+            "scope": "collection",
+            "_type": "workspace"
+        },
+        {
+            "_id": "req_ca2fa2861bce4742af5709a75da603ec",
+            "parentId": "wrk_41670f0b9c834c0a8c7588266505aacd",
+            "modified": 1705580810019,
+            "created": 1705575768648,
+            "url": "{{ _.argo_url }}/api/v1/events/{{ _.argowf_namespace }}/whalesay-ns",
+            "name": "Event WF - Namespace",
+            "description": "",
+            "method": "POST",
+            "body": {
+                "mimeType": "application/json",
+                "text": "{\n\t\"message\": \"hello events\"\n}"
+            },
+            "parameters": [
+                {
+                    "id": "pair_28a3d6f588af451d9839d1452a601f51",
+                    "name": "",
+                    "value": "",
+                    "description": ""
+                }
+            ],
+            "headers": [
+                {
+                    "name": "Content-Type",
+                    "value": "application/json"
+                },
+                {
+                    "name": "User-Agent",
+                    "value": "insomnia/2023.5.8"
+                }
+            ],
+            "authentication": {
+                "type": "bearer",
+                "token": "{{ _.argo_token }}"
+            },
+            "metaSortKey": -1705572806255,
+            "isPrivate": false,
+            "settingStoreCookies": true,
+            "settingSendCookies": true,
+            "settingDisableRenderRequestBody": false,
+            "settingEncodeUrl": true,
+            "settingRebuildPath": true,
+            "settingFollowRedirects": "global",
+            "_type": "request"
+        },
+        {
+            "_id": "req_38861602ff4f4222b63fb6d68bbed819",
+            "parentId": "wrk_41670f0b9c834c0a8c7588266505aacd",
+            "modified": 1705580456829,
+            "created": 1705567123744,
+            "url": "{{ _.argo_url }}/api/v1/workflows/{{ _.argowf_namespace }}/submit",
+            "name": "Create WF - Cluster",
+            "description": "",
+            "method": "POST",
+            "body": {
+                "mimeType": "application/json",
+                "text": "{\n\t\"resourceKind\": \"ClusterWorkflowTemplate\",\n\t\"namespace\": \"argo-workflows\",\n\t\"resourceName\": \"whalesay-cluster\",\n\t\"submitOptions\": {\n\t\t\"name\": \"create-wf-cluster\",\n\t\t\"parameters\": [\n\t\t\t\"message=hello\"\n\t\t]\n\t}\n}"
+            },
+            "parameters": [],
+            "headers": [
+                {
+                    "name": "Content-Type",
+                    "value": "application/json"
+                },
+                {
+                    "name": "User-Agent",
+                    "value": "insomnia/8.5.1"
+                }
+            ],
+            "authentication": {
+                "type": "bearer",
+                "token": "{{ _.argo_token }}"
+            },
+            "metaSortKey": -1705538168452.5,
+            "isPrivate": false,
+            "settingStoreCookies": true,
+            "settingSendCookies": true,
+            "settingDisableRenderRequestBody": false,
+            "settingEncodeUrl": true,
+            "settingRebuildPath": true,
+            "settingFollowRedirects": "global",
+            "_type": "request"
+        },
+        {
+            "_id": "req_540fa602d5ff4cf2bad315f59cb298d9",
+            "parentId": "wrk_41670f0b9c834c0a8c7588266505aacd",
+            "modified": 1705580481893,
+            "created": 1705503530650,
+            "url": "{{ _.argo_url }}/api/v1/workflows/{{ _.argowf_namespace }}/submit",
+            "name": "Create WF - Namespace",
+            "description": "",
+            "method": "POST",
+            "body": {
+                "mimeType": "application/json",
+                "text": "{\n\t\"resourceKind\": \"WorkflowTemplate\",\n\t\"namespace\": \"argo-workflows\",\n\t\"resourceName\": \"whalesay-ns\",\n\t\"submitOptions\": {\n\t\t\"name\": \"create-wf-ns\",\n\t\t\"parameters\": [\n\t\t\t\"message=hello\"\n\t\t]\n\t}\n}"
+            },
+            "parameters": [],
+            "headers": [
+                {
+                    "name": "Content-Type",
+                    "value": "application/json",
+                    "id": "pair_76f0c260a6884a30a4e278bf084f80c8"
+                },
+                {
+                    "name": "User-Agent",
+                    "value": "insomnia/8.5.1",
+                    "id": "pair_9fabd029ac1247749cc8503fb4e2fbe0"
+                }
+            ],
+            "authentication": {
+                "type": "bearer",
+                "token": "{{ _.argo_token }}"
+            },
+            "metaSortKey": -1705503530650,
+            "isPrivate": false,
+            "settingStoreCookies": true,
+            "settingSendCookies": true,
+            "settingDisableRenderRequestBody": false,
+            "settingEncodeUrl": true,
+            "settingRebuildPath": true,
+            "settingFollowRedirects": "global",
+            "_type": "request"
+        },
+        {
+            "_id": "req_ce500c3db6084c4a8ba7129e0e66a75d",
+            "parentId": "wrk_41670f0b9c834c0a8c7588266505aacd",
+            "modified": 1705580489097,
+            "created": 1705569476001,
+            "url": "{{ _.argo_url }}/api/v1/workflows/{{ _.argowf_namespace }}/submit",
+            "name": "trigger-longer-wf-tmpl",
+            "description": "",
+            "method": "POST",
+            "body": {
+                "mimeType": "application/json",
+                "text": "{\n    \"resourceKind\": \"ClusterWorkflowTemplate\",\n    \"namespace\": \"argo-wf-demo\",\n    \"resourceName\": \"whalesay-hello-world-template\",\n    \"submitOptions\": {\n        \"name\": \"whalesay-hello\"\n    }\n}\n"
+            },
+            "parameters": [],
+            "headers": [
+                {
+                    "name": "Content-Type",
+                    "value": "application/json",
+                    "id": "pair_76f0c260a6884a30a4e278bf084f80c8"
+                },
+                {
+                    "name": "User-Agent",
+                    "value": "insomnia/8.5.1",
+                    "id": "pair_9fabd029ac1247749cc8503fb4e2fbe0"
+                }
+            ],
+            "authentication": {
+                "type": "bearer",
+                "token": "{{ _.argo_token }}"
+            },
+            "metaSortKey": -1705503530600,
+            "isPrivate": false,
+            "settingStoreCookies": true,
+            "settingSendCookies": true,
+            "settingDisableRenderRequestBody": false,
+            "settingEncodeUrl": true,
+            "settingRebuildPath": true,
+            "settingFollowRedirects": "global",
+            "_type": "request"
+        },
+        {
+            "_id": "req_ee1f678dbcf24543917534dbbab6f758",
+            "parentId": "fld_11adf43365974e199644ba206f5798a9",
+            "modified": 1705581074355,
+            "created": 1705569655803,
+            "url": "{{ _.argo_url }}/api/v1/workflows/{{ _.argowf_namespace }}/create-wf-ns/resubmit",
+            "name": "resubmit-wf",
+            "description": "",
+            "method": "PUT",
+            "body": {
+                "mimeType": "application/json",
+                "text": "\n"
+            },
+            "parameters": [],
+            "headers": [
+                {
+                    "name": "Content-Type",
+                    "value": "application/json",
+                    "id": "pair_76f0c260a6884a30a4e278bf084f80c8"
+                },
+                {
+                    "name": "User-Agent",
+                    "value": "insomnia/8.5.1",
+                    "id": "pair_9fabd029ac1247749cc8503fb4e2fbe0"
+                }
+            ],
+            "authentication": {
+                "type": "bearer",
+                "token": "{{ _.argo_token }}"
+            },
+            "metaSortKey": -1705581056390,
+            "isPrivate": false,
+            "settingStoreCookies": true,
+            "settingSendCookies": true,
+            "settingDisableRenderRequestBody": false,
+            "settingEncodeUrl": true,
+            "settingRebuildPath": true,
+            "settingFollowRedirects": "global",
+            "_type": "request"
+        },
+        {
+            "_id": "fld_11adf43365974e199644ba206f5798a9",
+            "parentId": "wrk_41670f0b9c834c0a8c7588266505aacd",
+            "modified": 1705581042462,
+            "created": 1705581036763,
+            "name": "Lifecycle",
+            "description": "",
+            "environment": {},
+            "environmentPropertyOrder": null,
+            "metaSortKey": -1705503530575,
+            "_type": "request_group"
+        },
+        {
+            "_id": "req_6faf964c213d4dde82b935df6a2606e7",
+            "parentId": "fld_11adf43365974e199644ba206f5798a9",
+            "modified": 1705581092765,
+            "created": 1705569596072,
+            "url": "{{ _.argo_url }}/api/v1/workflows/{{ _.argowf_namespace }}/create-wf-ns/suspend",
+            "name": "suspend-wf",
+            "description": "",
+            "method": "PUT",
+            "body": {
+                "mimeType": "application/json",
+                "text": "\n"
+            },
+            "parameters": [],
+            "headers": [
+                {
+                    "name": "Content-Type",
+                    "value": "application/json",
+                    "id": "pair_76f0c260a6884a30a4e278bf084f80c8"
+                },
+                {
+                    "name": "User-Agent",
+                    "value": "insomnia/8.5.1",
+                    "id": "pair_9fabd029ac1247749cc8503fb4e2fbe0"
+                }
+            ],
+            "authentication": {
+                "type": "bearer",
+                "token": "{{ _.argo_token }}"
+            },
+            "metaSortKey": -1705581056240,
+            "isPrivate": false,
+            "settingStoreCookies": true,
+            "settingSendCookies": true,
+            "settingDisableRenderRequestBody": false,
+            "settingEncodeUrl": true,
+            "settingRebuildPath": true,
+            "settingFollowRedirects": "global",
+            "_type": "request"
+        },
+        {
+            "_id": "req_b20904304eda4473bf6a68037090c7e5",
+            "parentId": "fld_11adf43365974e199644ba206f5798a9",
+            "modified": 1705581062251,
+            "created": 1705569715444,
+            "url": "{{ _.argo_url }}/api/v1/workflows/{{ _.argowf_namespace }}/create-wf-ns/resume",
+            "name": "resume-wf",
+            "description": "",
+            "method": "PUT",
+            "body": {
+                "mimeType": "application/json",
+                "text": "\n"
+            },
+            "parameters": [],
+            "headers": [
+                {
+                    "name": "Content-Type",
+                    "value": "application/json",
+                    "id": "pair_76f0c260a6884a30a4e278bf084f80c8"
+                },
+                {
+                    "name": "User-Agent",
+                    "value": "insomnia/8.5.1",
+                    "id": "pair_9fabd029ac1247749cc8503fb4e2fbe0"
+                }
+            ],
+            "authentication": {
+                "type": "bearer",
+                "token": "{{ _.argo_token }}"
+            },
+            "metaSortKey": -1705581056090,
+            "isPrivate": false,
+            "settingStoreCookies": true,
+            "settingSendCookies": true,
+            "settingDisableRenderRequestBody": false,
+            "settingEncodeUrl": true,
+            "settingRebuildPath": true,
+            "settingFollowRedirects": "global",
+            "_type": "request"
+        },
+        {
+            "_id": "req_b6150cc96bf2483e8e145e44dcd0ce97",
+            "parentId": "fld_11adf43365974e199644ba206f5798a9",
+            "modified": 1705581081808,
+            "created": 1705569870514,
+            "url": "{{ _.argo_url }}/api/v1/workflows/{{ _.argowf_namespace }}/create-wf-ns/stop",
+            "name": "stop-wf",
+            "description": "",
+            "method": "PUT",
+            "body": {
+                "mimeType": "application/json",
+                "text": "\n"
+            },
+            "parameters": [],
+            "headers": [
+                {
+                    "name": "Content-Type",
+                    "value": "application/json",
+                    "id": "pair_76f0c260a6884a30a4e278bf084f80c8"
+                },
+                {
+                    "name": "User-Agent",
+                    "value": "insomnia/8.5.1",
+                    "id": "pair_9fabd029ac1247749cc8503fb4e2fbe0"
+                }
+            ],
+            "authentication": {
+                "type": "bearer",
+                "token": "{{ _.argo_token }}"
+            },
+            "metaSortKey": -1705581055940,
+            "isPrivate": false,
+            "settingStoreCookies": true,
+            "settingSendCookies": true,
+            "settingDisableRenderRequestBody": false,
+            "settingEncodeUrl": true,
+            "settingRebuildPath": true,
+            "settingFollowRedirects": "global",
+            "_type": "request"
+        },
+        {
+            "_id": "req_881d2a5b9d6f434d8fd8063564bf8f7f",
+            "parentId": "fld_11adf43365974e199644ba206f5798a9",
+            "modified": 1705581090633,
+            "created": 1705570208416,
+            "url": "{{ _.argo_url }}/api/v1/workflows/{{ _.argowf_namespace }}/create-wf-ns/retry",
+            "name": "retry-wf",
+            "description": "",
+            "method": "PUT",
+            "body": {
+                "mimeType": "application/json",
+                "text": "\n"
+            },
+            "parameters": [],
+            "headers": [
+                {
+                    "name": "Content-Type",
+                    "value": "application/json",
+                    "id": "pair_76f0c260a6884a30a4e278bf084f80c8"
+                },
+                {
+                    "name": "User-Agent",
+                    "value": "insomnia/8.5.1",
+                    "id": "pair_9fabd029ac1247749cc8503fb4e2fbe0"
+                }
+            ],
+            "authentication": {
+                "type": "bearer",
+                "token": "{{ _.argo_token }}"
+            },
+            "metaSortKey": -1705581055915,
+            "isPrivate": false,
+            "settingStoreCookies": true,
+            "settingSendCookies": true,
+            "settingDisableRenderRequestBody": false,
+            "settingEncodeUrl": true,
+            "settingRebuildPath": true,
+            "settingFollowRedirects": "global",
+            "_type": "request"
+        },
+        {
+            "_id": "req_4cf0d938728641bb80ce5634e11382d2",
+            "parentId": "fld_11adf43365974e199644ba206f5798a9",
+            "modified": 1705581069217,
+            "created": 1705571679595,
+            "url": "{{ _.argo_url }}/api/v1/workflows/{{ _.argowf_namespace }}/create-wf-ns",
+            "name": "delete-wf",
+            "description": "",
+            "method": "DELETE",
+            "body": {
+                "mimeType": "application/json",
+                "text": "\n"
+            },
+            "parameters": [],
+            "headers": [
+                {
+                    "name": "Content-Type",
+                    "value": "application/json",
+                    "id": "pair_76f0c260a6884a30a4e278bf084f80c8"
+                },
+                {
+                    "name": "User-Agent",
+                    "value": "insomnia/8.5.1",
+                    "id": "pair_9fabd029ac1247749cc8503fb4e2fbe0"
+                }
+            ],
+            "authentication": {
+                "type": "bearer",
+                "token": "{{ _.argo_token }}"
+            },
+            "metaSortKey": -1705581055890,
+            "isPrivate": false,
+            "settingStoreCookies": true,
+            "settingSendCookies": true,
+            "settingDisableRenderRequestBody": false,
+            "settingEncodeUrl": true,
+            "settingRebuildPath": true,
+            "settingFollowRedirects": "global",
+            "_type": "request"
+        },
+        {
+            "_id": "env_7d3a6aeaf9291c8d3dff42c2467b2aff89eac8f5",
+            "parentId": "wrk_41670f0b9c834c0a8c7588266505aacd",
+            "modified": 1705580821689,
+            "created": 1705572948503,
+            "name": "Base Environment",
+            "data": {
+                "argo_url": "",
+                "argowf_namespace": "",
+                "wf-name": "",
+                "argo_token": ""
+            },
+            "dataPropertyOrder": {
+                "&": [
+                    "argo_url",
+                    "argowf_namespace",
+                    "wf-name",
+                    "argo_token"
+                ]
+            },
+            "color": null,
+            "isPrivate": false,
+            "metaSortKey": 1705572948503,
+            "_type": "environment"
+        },
+        {
+            "_id": "jar_7d3a6aeaf9291c8d3dff42c2467b2aff89eac8f5",
+            "parentId": "wrk_41670f0b9c834c0a8c7588266505aacd",
+            "modified": 1705573623192,
+            "created": 1705572948504,
+            "name": "Default Jar",
+            "cookies": [
+                {
+                    "key": "089c23e3e558726788bc13b674cea28b",
+                    "value": "fa2ecede489083b8b8e47dcc232bce66",
+                    "domain": "argowf-argo-workflows.apps.ocp.sandbox2972.opentlc.com",
+                    "path": "/",
+                    "secure": true,
+                    "httpOnly": true,
+                    "hostOnly": true,
+                    "creation": "2024-01-18T10:27:03.191Z",
+                    "lastAccessed": "2024-01-18T10:27:03.191Z",
+                    "sameSite": "none",
+                    "id": "03442798027891891"
+                }
+            ],
+            "_type": "cookie_jar"
+        }
+    ]
+}
