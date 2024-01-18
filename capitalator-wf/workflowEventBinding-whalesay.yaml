@@ -1,0 +1,17 @@
+---
+apiVersion: argoproj.io/v1alpha1
+kind: WorkflowEventBinding
+metadata:
+  name: whalesay
+spec:
+  event:
+    selector: payload.message != ""
+  submit:
+    workflowTemplateRef:
+      name: whalesay
+      clusterScope: true
+    arguments:
+      parameters:
+        - name: message
+          valueFrom:
+            event: payload.message
