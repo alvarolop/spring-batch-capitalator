@@ -1,13 +1,18 @@
 ---
 apiVersion: argoproj.io/v1alpha1
-kind: CronWorkflow
+kind: WorkflowEventBinding
 metadata:
   name: cluster-whalesay
   namespace: argo-workflows
 spec:
-  # run daily at 2am
-  schedule: "* * * * *"
-  workflowSpec:
+  event:
+    selector: payload.message != ""
+  submit:
     workflowTemplateRef:
       name: whalesay-hello-world-template
       clusterScope: true
+    arguments:
+      parameters:
+        - name: message
+          valueFrom:
+            event: payload.message

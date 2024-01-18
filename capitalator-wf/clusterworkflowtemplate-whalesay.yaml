@@ -1,9 +1,8 @@
 ---
 apiVersion: argoproj.io/v1alpha1
-kind: WorkflowTemplate
+kind: ClusterWorkflowTemplate
 metadata:
-  name: whalesay-hello-world-template
-  namespace: argo-workflows
+  name: whalesay-hello-world-cluster-template
 spec:
 
   workflowMetadata:

@@ -10,7 +10,7 @@ spec:
   submit:
     workflowTemplateRef:
       name: whalesay-hello-world-template
-      clusterScope: true
+      namespace: argo-workflows
     arguments:
       parameters:
         - name: message
