@@ -6,7 +6,8 @@ metadata:
   namespace: argo-workflows
 spec:
   # run daily at 2am
-  schedule: "/10 * * * *"
+  schedule: "* * * * *"
   workflowSpec:
     workflowTemplateRef:
-      name: whalesay-hello-world-template
+      name: whalesay-hello-world-cluster-template
+      clusterScope: true

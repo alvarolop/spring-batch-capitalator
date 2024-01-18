@@ -9,7 +9,7 @@ spec:
     selector: payload.message != ""
   submit:
     workflowTemplateRef:
-      name: whalesay-hello-world-template
+      name: whalesay-hello-world-cluster-template
       clusterScope: true
     arguments:
       parameters:

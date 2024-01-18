@@ -27,19 +27,19 @@ spec:
       - name: A
         template: whalesay
         arguments:
-          parameters: [{name: message, value: "This is step A"}]
+          parameters: [{name: message, value: "[Cluster] This is step A"}]
       - name: B
         dependencies: [A]
         template: whalesay
         arguments:
-          parameters: [{name: message, value: "This is step B"}]
+          parameters: [{name: message, value: "[Cluster] This is step B"}]
       - name: C
         dependencies: [B]
         template: whalesay
         arguments:
-          parameters: [{name: message, value: "This is step C"}]
+          parameters: [{name: message, value: "[Cluster] This is step C"}]
       - name: D
         dependencies: [C]
         template: whalesay
         arguments:
-          parameters: [{name: message, value: "This is step D"}]
+          parameters: [{name: message, value: "[Cluster] This is step D"}]
