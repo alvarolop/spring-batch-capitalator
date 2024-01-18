@@ -3,6 +3,7 @@ apiVersion: argoproj.io/v1alpha1
 kind: WorkflowEventBinding
 metadata:
   name: whalesay
+  namespace: argo-workflows
 spec:
   event:
     selector: payload.message != ""
