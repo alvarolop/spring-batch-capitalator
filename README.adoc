@@ -232,4 +232,65 @@ TIP: For a full comprehensive explanation of Argo Workflows metrics, you can che
 
 
 
+=== REST API
 
+NOTE: To use the REST API, you need to enable Client authentication, which allows you to authenticate using a Bearer Token. This is already done with the default values.
+
+In order to use the provided Swagger specification, you will need to follow three simple steps:
+
+1. You need to retrieve the URL with the openAPI spec. You can obtain it from https://argo-workflows.readthedocs.io/en/latest/swagger/[here]. As of today, this is the value: `https://raw.githubusercontent.com/argoproj/argo-workflows/main/api/openapi-spec/swagger.json`. Add it to a brand new Insomnia collection:
++
+.Import OpenAPI collection
+image::import-openapi-collection.png["Import OpenAPI collection",width=60%]
++ 
+2. Obtain the values from your cluster in order to configure the Swagger variables. You can run the following command:
++
+[source, bash]
+----
+echo "bearer_token: $(oc get secret argowf-cluster-admins-token -n argo-workflows -o=jsonpath='{.data.token}' | base64 --decode )"
+echo "base_url: $(oc get routes argowf -n argo-workflows --template='https://{{.spec.host}}')"
+echo "namespace: <Here put the namespace where you normally execute the workflows>"
+----
++
+3. Now, access the Environment configuration and paste the following JSON to your Swagger Env. 
+[source, json]
+----
+{
+	"base_url": "<base_url>",
+	"scheme": "http",
+	"host": "localhost:2746",
+    "namespace": "<namespace>",
+	"DEFAULT_HEADERS": {
+		"Authorization": "Bearer <bearer_token>"
+	}
+}
+----
+
+
+Try a REST API call and **happy coding**!! :rocket:
+
+
+
+=== API Events
+
+To keep things simple, you can use the `api/v1/workflows` endpoint to create workflows, but there's one endpoint that is specifically designed to create workflows via an API: `api/v1/events`. You should use this for most cases (including Jenkins):
+
+* It only allows you to create workflows from a `WorkflowTemplate`, so is more secure.
+* It allows you to parse the HTTP payload and use it as parameters.
+* It allows you to integrate with other systems without you having to change those systems.
+* Webhooks also support GitHub and GitLab, so you can trigger workflow from git actions.
+
+To use this, you need to create a `WorkflowTemplate` and a workflow event binding:
+
+A workflow event binding consists of:
+
+* An event selector that matches events.
+* A reference to a `WorkflowTemplates` using `workflowTemplateRef`.
+* Optional parameters.
+
+
+.Example of Event execution
+[source, bash]
+----
+curl -sH "Authorization: $ARGO_TOKEN" $ARGO_URL/api/v1/events/whalesay/- -d '{"message": "hello events"}'
+----
