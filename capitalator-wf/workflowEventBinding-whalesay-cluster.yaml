@@ -6,7 +6,7 @@ metadata:
   namespace: argo-workflows
 spec:
   event:
-    selector: payload.message != "" && discriminator == "cluster-whalesay"
+    selector: payload.message != "" && discriminator == "whalesay-cluster"
   submit:
     workflowTemplateRef:
       name: whalesay-cluster
