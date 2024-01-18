@@ -1,0 +1,13 @@
+---
+apiVersion: argoproj.io/v1alpha1
+kind: CronWorkflow
+metadata:
+  name: whalesay
+  namespace: argo-workflows
+spec:
+  # run daily at 2am
+  schedule: "/10 * * * *"
+  workflowSpec:
+    workflowTemplateRef:
+      name: whalesay-hello-world-template
+      clusterScope: true
