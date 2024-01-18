@@ -256,13 +256,13 @@ echo "namespace: <Here put the namespace where you normally execute the workflow
 [source, json]
 ----
 {
-	"base_url": "<base_url>",
-	"scheme": "http",
-	"host": "localhost:2746",
+    "base_url": "<base_url>",
+    "scheme": "http",
+    "host": "localhost:2746",
     "namespace": "<namespace>",
-	"DEFAULT_HEADERS": {
-		"Authorization": "Bearer <bearer_token>"
-	}
+    "DEFAULT_HEADERS": {
+        "Authorization": "Bearer <bearer_token>"
+    }
 }
 ----
 
