@@ -2,14 +2,14 @@
 apiVersion: argoproj.io/v1alpha1
 kind: WorkflowEventBinding
 metadata:
-  name: cluster-whalesay
+  name: whalesay-cluster
   namespace: argo-workflows
 spec:
   event:
     selector: payload.message != "" && discriminator == "cluster-whalesay"
   submit:
     workflowTemplateRef:
-      name: whalesay-hello-world-cluster-template
+      name: whalesay-cluster
       clusterScope: true
     arguments:
       parameters:

@@ -9,5 +9,5 @@ spec:
   schedule: "*/15 * * * *"
   workflowSpec:
     workflowTemplateRef:
-      name: whalesay-hello-world-template
+      name: whalesay-ns
       namespace: argo-workflows

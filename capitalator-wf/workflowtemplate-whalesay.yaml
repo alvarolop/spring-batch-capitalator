@@ -2,7 +2,7 @@
 apiVersion: argoproj.io/v1alpha1
 kind: WorkflowTemplate
 metadata:
-  name: whalesay-hello-world-template
+  name: whalesay-ns
   namespace: argo-workflows
 spec:
 

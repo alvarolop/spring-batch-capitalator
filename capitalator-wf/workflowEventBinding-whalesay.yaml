@@ -2,14 +2,14 @@
 apiVersion: argoproj.io/v1alpha1
 kind: WorkflowEventBinding
 metadata:
-  name: whalesay
+  name: whalesay-ns
   namespace: argo-workflows
 spec:
   event:
     selector: payload.message != "" && discriminator == "whalesay"
   submit:
     workflowTemplateRef:
-      name: whalesay-hello-world-template
+      name: whalesay-ns
       namespace: argo-workflows
     arguments:
       parameters:

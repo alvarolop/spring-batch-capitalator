@@ -2,7 +2,7 @@
 apiVersion: argoproj.io/v1alpha1
 kind: ClusterWorkflowTemplate
 metadata:
-  name: whalesay-hello-world-cluster-template
+  name: whalesay-cluster
 spec:
 
   workflowMetadata:
