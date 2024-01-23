@@ -76,7 +76,8 @@
     {
       "collapsed": false,
       "datasource": {
-        "type": "prometheus"
+        "type": "prometheus",
+        "uid": "P5DCFC7561CCDE821"
       },
       "gridPos": {
         "h": 1,
@@ -143,6 +144,7 @@
             "mode": "thresholds"
           },
           "mappings": [],
+          "noValue": "0",
           "thresholds": {
             "mode": "absolute",
             "steps": [
@@ -191,7 +193,7 @@
           },
           "editorMode": "code",
           "exemplar": false,
-          "expr": "argo_workflows_count{prometheus=~\"^$dc$\",namespace=~\"$ns\",status=\"Pending\"} ",
+          "expr": "sum(argo_workflows_count{prometheus=~\"^$dc$\",namespace=~\"$ns\",status=\"Pending\"})",
           "instant": true,
           "interval": "",
           "legendFormat": "",
@@ -214,6 +216,7 @@
             "mode": "thresholds"
           },
           "mappings": [],
+          "noValue": "0",
           "thresholds": {
             "mode": "absolute",
             "steps": [
@@ -262,7 +265,7 @@
           },
           "editorMode": "code",
           "exemplar": false,
-          "expr": "argo_workflows_count{prometheus=~\"^$dc$\",namespace=~\"$ns\",status=\"Running\"}",
+          "expr": "sum(argo_workflows_count{prometheus=~\"^$dc$\",namespace=~\"$ns\",status=\"Running\"})",
           "instant": true,
           "interval": "",
           "legendFormat": "",
@@ -334,7 +337,7 @@
           },
           "editorMode": "code",
           "exemplar": false,
-          "expr": "argo_workflows_count{prometheus=~\"^$dc$\",namespace=~\"$ns\",status=\"Error\"}",
+          "expr": "sum(argo_workflows_count{prometheus=~\"^$dc$\",namespace=~\"$ns\",status=\"Error\"})",
           "instant": true,
           "interval": "",
           "legendFormat": "",
@@ -406,7 +409,7 @@
           },
           "editorMode": "code",
           "exemplar": false,
-          "expr": "argo_workflows_count{prometheus=~\"^$dc$\",namespace=~\"$ns\",status=\"Failed\"}",
+          "expr": "sum(argo_workflows_count{prometheus=~\"^$dc$\",namespace=~\"$ns\",status=\"Failed\"})",
           "instant": true,
           "interval": "",
           "legendFormat": "",
@@ -463,7 +466,7 @@
           "calcs": [
             "lastNotNull"
           ],
-          "fields": "/^A\\-series$/",
+          "fields": "",
           "values": false
         },
         "text": {},
@@ -502,6 +505,7 @@
             "mode": "thresholds"
           },
           "mappings": [],
+          "noValue": "0",
           "thresholds": {
             "mode": "absolute",
             "steps": [
@@ -546,7 +550,7 @@
           },
           "editorMode": "code",
           "exemplar": false,
-          "expr": "argo_workflows_count{prometheus=~\"^$dc$\",namespace=~\"$ns\",status=\"Succeeded\"}",
+          "expr": "sum(argo_workflows_count{prometheus=~\"^$dc$\",namespace=~\"$ns\",status=\"Succeeded\"})",
           "instant": true,
           "interval": "",
           "legendFormat": "",
@@ -561,7 +565,8 @@
     {
       "collapsed": false,
       "datasource": {
-        "type": "prometheus"
+        "type": "prometheus",
+        "uid": "P5DCFC7561CCDE821"
       },
       "gridPos": {
         "h": 1,
@@ -580,7 +585,7 @@
           "refId": "A"
         }
       ],
-      "title": "Number of Workflows currently accessible by the controller by status",
+      "title": "Number of Workflows currently accessible by the Controller by status",
       "type": "row"
     },
     {
@@ -602,7 +607,7 @@
             "barAlignment": 0,
             "drawStyle": "line",
             "fillOpacity": 10,
-            "gradientMode": "none",
+            "gradientMode": "opacity",
             "hideFrom": {
               "legend": false,
               "tooltip": false,
@@ -616,7 +621,7 @@
               "type": "linear"
             },
             "showPoints": "never",
-            "spanNulls": false,
+            "spanNulls": true,
             "stacking": {
               "group": "A",
               "mode": "none"
@@ -642,73 +647,7 @@
           },
           "unit": "short"
         },
-        "overrides": [
-          {
-            "matcher": {
-              "id": "byValue",
-              "options": {
-                "op": "gte",
-                "reducer": "allIsNull",
-                "value": 0
-              }
-            },
-            "properties": [
-              {
-                "id": "custom.hideFrom",
-                "value": {
-                  "legend": true,
-                  "tooltip": true,
-                  "viz": false
-                }
-              }
-            ]
-          },
-          {
-            "matcher": {
-              "id": "byName",
-              "options": "prometheus/runner-prometheus : argo : Succeeded"
-            },
-            "properties": [
-              {
-                "id": "color",
-                "value": {
-                  "fixedColor": "green",
-                  "mode": "fixed"
-                }
-              }
-            ]
-          },
-          {
-            "matcher": {
-              "id": "byName",
-              "options": "prometheus/runner-prometheus : argo : Pending"
-            },
-            "properties": [
-              {
-                "id": "color",
-                "value": {
-                  "fixedColor": "orange",
-                  "mode": "fixed"
-                }
-              }
-            ]
-          },
-          {
-            "matcher": {
-              "id": "byName",
-              "options": "prometheus/runner-prometheus : argo : Running"
-            },
-            "properties": [
-              {
-                "id": "color",
-                "value": {
-                  "fixedColor": "blue",
-                  "mode": "fixed"
-                }
-              }
-            ]
-          }
-        ]
+        "overrides": []
       },
       "gridPos": {
         "h": 9,
@@ -741,7 +680,7 @@
           },
           "editorMode": "code",
           "exemplar": true,
-          "expr": "argo_workflows_count{status!~\"(Error|Failed)\",namespace=~\"$ns\",prometheus=~\"^$dc$\"}",
+          "expr": "sum by (prometheus, namespace, status) (argo_workflows_count{status!~\"(Error|Failed)\",namespace=~\"$ns\",prometheus=~\"^$dc$\"})",
           "interval": "1m",
           "legendFormat": "{{prometheus}} : {{namespace}} : {{status}}",
           "queryType": "randomWalk",
@@ -786,7 +725,7 @@
               "type": "linear"
             },
             "showPoints": "never",
-            "spanNulls": false,
+            "spanNulls": true,
             "stacking": {
               "group": "A",
               "mode": "none"
@@ -812,58 +751,7 @@
           },
           "unit": "short"
         },
-        "overrides": [
-          {
-            "matcher": {
-              "id": "byValue",
-              "options": {
-                "op": "gte",
-                "reducer": "allIsNull",
-                "value": 0
-              }
-            },
-            "properties": [
-              {
-                "id": "custom.hideFrom",
-                "value": {
-                  "legend": true,
-                  "tooltip": true,
-                  "viz": false
-                }
-              }
-            ]
-          },
-          {
-            "matcher": {
-              "id": "byName",
-              "options": "prometheus/runner-prometheus : argo : Failed"
-            },
-            "properties": [
-              {
-                "id": "color",
-                "value": {
-                  "fixedColor": "red",
-                  "mode": "fixed"
-                }
-              }
-            ]
-          },
-          {
-            "matcher": {
-              "id": "byName",
-              "options": "prometheus/runner-prometheus : argo : Error"
-            },
-            "properties": [
-              {
-                "id": "color",
-                "value": {
-                  "fixedColor": "orange",
-                  "mode": "fixed"
-                }
-              }
-            ]
-          }
-        ]
+        "overrides": []
       },
       "gridPos": {
         "h": 9,
@@ -896,7 +784,7 @@
           },
           "editorMode": "code",
           "exemplar": true,
-          "expr": "argo_workflows_count{status=~\"(Error|Failed)\",namespace=~\"$ns\",prometheus=~\"^$dc$\"}",
+          "expr": "sum by (prometheus, namespace, status) (argo_workflows_count{status=~\"(Error|Failed)\",namespace=~\"$ns\",prometheus=~\"^$dc$\"})",
           "interval": "1m",
           "legendFormat": "{{prometheus}} : {{namespace}} : {{status}}",
           "queryType": "randomWalk",
@@ -911,7 +799,8 @@
     {
       "collapsed": false,
       "datasource": {
-        "type": "prometheus"
+        "type": "prometheus",
+        "uid": "P5DCFC7561CCDE821"
       },
       "gridPos": {
         "h": 1,
@@ -960,9 +849,6 @@
             },
             "insertNulls": false,
             "lineInterpolation": "linear",
-            "lineStyle": {
-              "fill": "solid"
-            },
             "lineWidth": 1,
             "pointSize": 3,
             "scaleDistribution": {
@@ -978,7 +864,7 @@
               "mode": "off"
             }
           },
-          "decimals": 2,
+          "decimals": 1,
           "mappings": [],
           "thresholds": {
             "mode": "absolute",
@@ -994,7 +880,8 @@
             ]
           },
           "unit": "s"
-        }
+        },
+        "overrides": []
       },
       "gridPos": {
         "h": 9,
@@ -1043,7 +930,8 @@
     {
       "collapsed": false,
       "datasource": {
-        "type": "prometheus"
+        "type": "prometheus",
+        "uid": "P5DCFC7561CCDE821"
       },
       "gridPos": {
         "h": 1,
@@ -1098,7 +986,7 @@
               "type": "linear"
             },
             "showPoints": "never",
-            "spanNulls": false,
+            "spanNulls": true,
             "stacking": {
               "group": "A",
               "mode": "none"
@@ -1123,7 +1011,8 @@
             ]
           },
           "unit": "short"
-        }
+        },
+        "overrides": []
       },
       "gridPos": {
         "h": 9,
@@ -1156,7 +1045,7 @@
           },
           "editorMode": "code",
           "exemplar": true,
-          "expr": "increase(argo_workflows_queue_adds_count{prometheus=~\"^$dc$\",namespace=~\"$ns\"}[2m])",
+          "expr": "sum by (prometheus, namespace, queue_name) (increase(argo_workflows_queue_adds_count{prometheus=~\"^$dc$\",namespace=~\"$ns\"}[2m]))",
           "interval": "1m",
           "legendFormat": "{{prometheus}} : {{namespace}} : {{queue_name}}",
           "queryType": "randomWalk",
@@ -1195,7 +1084,7 @@
             },
             "insertNulls": false,
             "lineInterpolation": "linear",
-            "lineWidth": 2,
+            "lineWidth": 1,
             "pointSize": 5,
             "scaleDistribution": {
               "type": "linear"
@@ -1211,9 +1100,7 @@
             }
           },
           "decimals": 0,
-          "fieldMinMax": false,
           "mappings": [],
-          "max": 0,
           "min": 0,
           "thresholds": {
             "mode": "absolute",
@@ -1229,7 +1116,8 @@
             ]
           },
           "unit": "short"
-        }
+        },
+        "overrides": []
       },
       "gridPos": {
         "h": 9,
@@ -1262,7 +1150,7 @@
           },
           "editorMode": "code",
           "exemplar": true,
-          "expr": "argo_workflows_queue_depth_count{prometheus=~\"^$dc$\",namespace=~\"$ns\"}",
+          "expr": "sum by (prometheus, namespace, queue_name) (argo_workflows_queue_depth_count{prometheus=~\"^$dc$\",namespace=~\"$ns\"})",
           "interval": "1m",
           "legendFormat": "{{prometheus}} : {{namespace}} : {{queue_name}}",
           "queryType": "randomWalk",
@@ -1291,7 +1179,7 @@
             "axisLabel": "avg",
             "axisPlacement": "auto",
             "barAlignment": 0,
-            "drawStyle": "bars",
+            "drawStyle": "line",
             "fillOpacity": 10,
             "gradientMode": "opacity",
             "hideFrom": {
@@ -1307,7 +1195,7 @@
               "type": "linear"
             },
             "showPoints": "never",
-            "spanNulls": false,
+            "spanNulls": true,
             "stacking": {
               "group": "A",
               "mode": "none"
@@ -1316,7 +1204,7 @@
               "mode": "off"
             }
           },
-          "decimals": 2,
+          "decimals": 1,
           "mappings": [],
           "thresholds": {
             "mode": "absolute",
@@ -1332,7 +1220,8 @@
             ]
           },
           "unit": "s"
-        }
+        },
+        "overrides": []
       },
       "gridPos": {
         "h": 9,
@@ -1367,7 +1256,7 @@
           "exemplar": true,
           "expr": "  rate(argo_workflows_queue_latency_sum{queue_name=\"cron_wf_queue\",namespace=~\"^$ns$\",prometheus=~\"^$dc$\"}[1m])\n/\n  rate(argo_workflows_queue_latency_count{queue_name=\"cron_wf_queue\",namespace=~\"^$ns$\",prometheus=~\"^$dc$\"}[1m])",
           "interval": "1m",
-          "legendFormat": "{{prometheus}} : {{app}} : {{namespace}} : {{queue_name}}",
+          "legendFormat": "{{prometheus}} : {{namespace}} : {{queue_name}}",
           "queryType": "randomWalk",
           "range": true,
           "refId": "A"
@@ -1381,7 +1270,7 @@
           "exemplar": true,
           "expr": "  rate(argo_workflows_queue_latency_sum{queue_name=\"pod_queue\",namespace=~\"^$ns$\",prometheus=~\"^$dc$\"}[1m])\n/\n  rate(argo_workflows_queue_latency_count{queue_name=\"pod_queue\",namespace=~\"^$ns$\",prometheus=~\"^$dc$\"}[1m])",
           "interval": "1m",
-          "legendFormat": "{{prometheus}} : {{app}} : {{namespace}} : {{queue_name}}",
+          "legendFormat": "{{prometheus}} : {{namespace}} : {{queue_name}}",
           "range": true,
           "refId": "B"
         },
@@ -1395,7 +1284,7 @@
           "expr": "  rate(argo_workflows_queue_latency_sum{queue_name=\"wf_cron_queue\",namespace=~\"^$ns$\",prometheus=~\"^$dc$\"}[1m])\n/\n  rate(argo_workflows_queue_latency_count{queue_name=\"wf_cron_queue\",namespace=~\"^$ns$\",prometheus=~\"^$dc$\"}[1m])",
           "hide": false,
           "interval": "1m",
-          "legendFormat": "{{origin_prometheus}} : {{app}} : {{kubernetes_namespace}} : {{queue_name}}",
+          "legendFormat": "{{prometheus}} : {{namespace}} : {{queue_name}}",
           "range": true,
           "refId": "C"
         },
@@ -1409,7 +1298,7 @@
           "expr": "  rate(argo_workflows_queue_latency_sum{queue_name=\"workflow_queue\",namespace=~\"^$ns$\",prometheus=~\"^$dc$\"}[1m])\n/\n  rate(argo_workflows_queue_latency_count{queue_name=\"workflow_queue\",namespace=~\"^$ns$\",prometheus=~\"^$dc$\"}[1m])",
           "hide": false,
           "interval": "1m",
-          "legendFormat": "{{prometheus}} : {{app}} : {{namespace}} : {{queue_name}}",
+          "legendFormat": "{{prometheus}} : {{namespace}} : {{queue_name}}",
           "range": true,
           "refId": "D"
         }
@@ -1436,7 +1325,6 @@
         "type": "prometheus",
         "uid": "${DS_THANOS}"
       },
-      "description": "",
       "fieldConfig": {
         "defaults": {
           "color": {
@@ -1465,7 +1353,7 @@
               "type": "linear"
             },
             "showPoints": "never",
-            "spanNulls": false,
+            "spanNulls": true,
             "stacking": {
               "group": "A",
               "mode": "none"
@@ -1490,7 +1378,8 @@
             ]
           },
           "unit": "short"
-        }
+        },
+        "overrides": []
       },
       "gridPos": {
         "h": 9,
@@ -1523,7 +1412,7 @@
           },
           "editorMode": "code",
           "exemplar": true,
-          "expr": "sum by (status,namespace,prometheus) (argo_workflows_pods_count{prometheus=~\"^$dc$\",namespace=~\"$ns\"})",
+          "expr": "sum by (prometheus, namespace, status) (argo_workflows_pods_count{prometheus=~\"^$dc$\",namespace=~\"$ns\"})",
           "interval": "1m",
           "legendFormat": "{{prometheus}} : {{namespace}} : {{status}}",
           "queryType": "randomWalk",
@@ -1531,14 +1420,15 @@
           "refId": "A"
         }
       ],
-      "title": "Workflow pods",
+      "title": "Workflow Pods by State",
       "transparent": true,
       "type": "timeseries"
     },
     {
       "collapsed": false,
       "datasource": {
-        "type": "prometheus"
+        "type": "prometheus",
+        "uid": "P5DCFC7561CCDE821"
       },
       "gridPos": {
         "h": 1,
@@ -1594,7 +1484,7 @@
               "type": "linear"
             },
             "showPoints": "never",
-            "spanNulls": false,
+            "spanNulls": true,
             "stacking": {
               "group": "A",
               "mode": "none"
@@ -1603,7 +1493,7 @@
               "mode": "off"
             }
           },
-          "decimals": 0,
+          "decimals": 2,
           "mappings": [],
           "thresholds": {
             "mode": "absolute",
@@ -1619,7 +1509,8 @@
             ]
           },
           "unit": "short"
-        }
+        },
+        "overrides": []
       },
       "gridPos": {
         "h": 9,
@@ -1652,7 +1543,7 @@
           },
           "editorMode": "code",
           "exemplar": true,
-          "expr": "rate(log_messages{namespace=~\"$ns\",prometheus=~\"^$dc$\"}[1m])",
+          "expr": "sum by (prometheus, namespace, level) (rate(log_messages{namespace=~\"$ns\",prometheus=~\"^$dc$\"}[1m]))",
           "interval": "1m",
           "legendFormat": "{{prometheus}} : {{namespace}} : {{level}}",
           "queryType": "randomWalk",
@@ -1680,10 +1571,10 @@
           "uid": "${DS_THANOS}"
         },
         "definition": "label_values(argo_workflows_count,prometheus)",
-        "description": "Kubernetes cluster",
+        "description": "Kubernetes Cluster",
         "hide": 0,
         "includeAll": true,
-        "label": "K8s Cluster",
+        "label": "Kubernetes Cluster",
         "multi": true,
         "name": "dc",
         "options": [],
@@ -1709,7 +1600,7 @@
           "uid": "${DS_THANOS}"
         },
         "definition": "label_values(argo_workflows_count{prometheus=~\"^$dc$\"},namespace)",
-        "description": "Argo Workflow Controller namespace",
+        "description": "Workflow Controller Namespace",
         "hide": 0,
         "includeAll": true,
         "label": "WF Controller Namespace",
@@ -1733,13 +1624,13 @@
     ]
   },
   "time": {
-    "from": "now-3h",
+    "from": "now-1h",
     "to": "now"
   },
   "timepicker": {},
   "timezone": "",
   "title": "Argo Workflows Metrics",
   "uid": "cGlwZWtpdA",
-  "version": 1,
+  "version": 2,
   "weekStart": ""
 }
