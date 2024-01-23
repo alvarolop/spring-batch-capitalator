@@ -17,16 +17,16 @@ grafana:
   namespace: grafana
   app: argo-workflows
   dashboards:
-
-    - name: 14136-argo-metrics
-      folder: "Argo Workflows"
-      datasource: "DS_PROMETHEUS"
-      path: "dashboards/ARGO-Metrics.json"
       
     - name: 13927-argoworkflow-metrics
       folder: "Argo Workflows"
       datasource: "DS_PROMETHEUS"
-      path: "dashboards/ArgoWorkflow-metrics.json"
+      path: "dashboards/13927-argoworkflow-metrics.json"
+
+    - name: 14136-argo-metrics
+      folder: "Argo Workflows"
+      datasource: "DS_PROMETHEUS"
+      path: "dashboards/14136-argo-metrics.json"
 
     - name: 20348-argo-workflows-metrics
       folder: "Argo Workflows"
