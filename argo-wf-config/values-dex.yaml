@@ -1,8 +1,11 @@
 dex:
   # -- Boolean to enable the Chart dependency
   enabled: true
-  
-  name: dex
+
+  # -- A name to substitute for the full names of resources.
+  fullnameOverride: dex
+
+  # -- Number of replicas (pods) to launch.
   replicaCount: 1
 
   commonLabels: 
