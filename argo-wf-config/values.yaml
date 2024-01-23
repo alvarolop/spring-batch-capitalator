@@ -2,7 +2,7 @@ global:
   name: argowf
   namespace: argo-workflows
   ocp:
-    baseUrl: apps.ocp.sandbox2972.opentlc.com
+    baseUrl: apps.ocp.sandbox2314.opentlc.com
   createNamespaces:
     - app01-workflows
     - app02-workflows

@@ -79,7 +79,7 @@ argo-workflows:
     # SSO configuration when SSO is specified as a server auth mode.
     sso:
       enabled: true
-      issuer: https://dex-argo-workflows.apps.ocp.sandbox2972.opentlc.com/api/dex
+      issuer: https://dex-argo-workflows.apps.ocp.sandbox2314.opentlc.com/api/dex
       # sessionExpiry defines how long your login is valid for in hours. (optional, default: 10h)
       sessionExpiry: 240h
       clientId:
@@ -93,7 +93,7 @@ argo-workflows:
         # -- Key of a secret to retrieve the app OIDC client secret
         key: client-secret
       # - The OIDC redirect URL. Should be in the form <argo-wf-root-url>/oauth2/callback.
-      redirectUrl: https://argowf-argo-workflows.apps.ocp.sandbox2972.opentlc.com/oauth2/callback
+      redirectUrl: https://argowf-argo-workflows.apps.ocp.sandbox2314.opentlc.com/oauth2/callback
       # -- Skip TLS verification for the HTTP client
       rbac:
         # -- Adds ServiceAccount Policy to server (Cluster)Role.

@@ -40,7 +40,7 @@ dex:
           key: "client-secret"
 
   config:
-    issuer: https://dex-argo-workflows.apps.ocp.sandbox2972.opentlc.com/api/dex
+    issuer: https://dex-argo-workflows.apps.ocp.sandbox2314.opentlc.com/api/dex
     storage:
       type: memory
     web:
@@ -54,7 +54,7 @@ dex:
         name: Argo Workflows
         secretEnv: ARGO_WORKFLOWS_CLIENT_SECRET
         redirectURIs:
-          - https://argowf-argo-workflows.apps.ocp.sandbox2972.opentlc.com/oauth2/callback
+          - https://argowf-argo-workflows.apps.ocp.sandbox2314.opentlc.com/oauth2/callback
     connectors:
       - type: openshift
         id: openshift
@@ -65,7 +65,7 @@ dex:
           clientSecret: $DEX_OAUTH_CLIENT_SECRET
           insecureCA: true
           groups: []
-          redirectURI: https://dex-argo-workflows.apps.ocp.sandbox2972.opentlc.com/api/dex/callback
+          redirectURI: https://dex-argo-workflows.apps.ocp.sandbox2314.opentlc.com/api/dex/callback
 
   serviceAccount:
     create: false
