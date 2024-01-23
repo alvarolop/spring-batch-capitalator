@@ -23,15 +23,15 @@ grafana:
       datasource: "DS_PROMETHEUS"
       path: "dashboards/ARGO-Metrics.json"
       
-    - name: argoworkflow-metrics
+    - name: 13927-argoworkflow-metrics
       folder: "Argo Workflows"
       datasource: "DS_PROMETHEUS"
       path: "dashboards/ArgoWorkflow-metrics.json"
 
-    - name: tim-collins-update
+    - name: 20348-argo-workflows-metrics
       folder: "Argo Workflows"
       datasource: "DS_THANOS"
-      path: "dashboards/tim-collins-update.json"
+      path: "dashboards/20348-argo-workflows-metrics.json"
 
 rbac:
   # Users will be assigned ONLY one SA based on the first rule that matches the groups of the user.

@@ -76,8 +76,7 @@
     {
       "collapsed": false,
       "datasource": {
-        "type": "prometheus",
-        "uid": "P5DCFC7561CCDE821"
+        "type": "prometheus"
       },
       "gridPos": {
         "h": 1,
@@ -562,8 +561,7 @@
     {
       "collapsed": false,
       "datasource": {
-        "type": "prometheus",
-        "uid": "P5DCFC7561CCDE821"
+        "type": "prometheus"
       },
       "gridPos": {
         "h": 1,
@@ -913,8 +911,7 @@
     {
       "collapsed": false,
       "datasource": {
-        "type": "prometheus",
-        "uid": "P5DCFC7561CCDE821"
+        "type": "prometheus"
       },
       "gridPos": {
         "h": 1,
@@ -997,29 +994,7 @@
             ]
           },
           "unit": "s"
-        },
-        "overrides": [
-          {
-            "matcher": {
-              "id": "byValue",
-              "options": {
-                "op": "gte",
-                "reducer": "allIsNull",
-                "value": 0
-              }
-            },
-            "properties": [
-              {
-                "id": "custom.hideFrom",
-                "value": {
-                  "legend": true,
-                  "tooltip": true,
-                  "viz": false
-                }
-              }
-            ]
-          }
-        ]
+        }
       },
       "gridPos": {
         "h": 9,
@@ -1068,8 +1043,7 @@
     {
       "collapsed": false,
       "datasource": {
-        "type": "prometheus",
-        "uid": "P5DCFC7561CCDE821"
+        "type": "prometheus"
       },
       "gridPos": {
         "h": 1,
@@ -1149,29 +1123,7 @@
             ]
           },
           "unit": "short"
-        },
-        "overrides": [
-          {
-            "matcher": {
-              "id": "byValue",
-              "options": {
-                "op": "gte",
-                "reducer": "allIsNull",
-                "value": 0
-              }
-            },
-            "properties": [
-              {
-                "id": "custom.hideFrom",
-                "value": {
-                  "legend": true,
-                  "tooltip": true,
-                  "viz": false
-                }
-              }
-            ]
-          }
-        ]
+        }
       },
       "gridPos": {
         "h": 9,
@@ -1277,29 +1229,7 @@
             ]
           },
           "unit": "short"
-        },
-        "overrides": [
-          {
-            "matcher": {
-              "id": "byValue",
-              "options": {
-                "op": "gte",
-                "reducer": "allIsNull",
-                "value": 0
-              }
-            },
-            "properties": [
-              {
-                "id": "custom.hideFrom",
-                "value": {
-                  "legend": true,
-                  "tooltip": true,
-                  "viz": false
-                }
-              }
-            ]
-          }
-        ]
+        }
       },
       "gridPos": {
         "h": 9,
@@ -1402,29 +1332,7 @@
             ]
           },
           "unit": "s"
-        },
-        "overrides": [
-          {
-            "matcher": {
-              "id": "byValue",
-              "options": {
-                "op": "gte",
-                "reducer": "allIsNull",
-                "value": 0
-              }
-            },
-            "properties": [
-              {
-                "id": "custom.hideFrom",
-                "value": {
-                  "legend": true,
-                  "tooltip": true,
-                  "viz": false
-                }
-              }
-            ]
-          }
-        ]
+        }
       },
       "gridPos": {
         "h": 9,
@@ -1582,59 +1490,7 @@
             ]
           },
           "unit": "short"
-        },
-        "overrides": [
-          {
-            "matcher": {
-              "id": "byValue",
-              "options": {
-                "op": "gte",
-                "reducer": "allIsNull",
-                "value": 0
-              }
-            },
-            "properties": [
-              {
-                "id": "custom.hideFrom",
-                "value": {
-                  "legend": true,
-                  "tooltip": true,
-                  "viz": false
-                }
-              }
-            ]
-          },
-          {
-            "matcher": {
-              "id": "byName",
-              "options": "prometheus/runner-prometheus : argo : Running"
-            },
-            "properties": [
-              {
-                "id": "color",
-                "value": {
-                  "fixedColor": "green",
-                  "mode": "fixed"
-                }
-              }
-            ]
-          },
-          {
-            "matcher": {
-              "id": "byName",
-              "options": "prometheus/runner-prometheus : argo : Pending"
-            },
-            "properties": [
-              {
-                "id": "color",
-                "value": {
-                  "fixedColor": "orange",
-                  "mode": "fixed"
-                }
-              }
-            ]
-          }
-        ]
+        }
       },
       "gridPos": {
         "h": 9,
@@ -1682,8 +1538,7 @@
     {
       "collapsed": false,
       "datasource": {
-        "type": "prometheus",
-        "uid": "P5DCFC7561CCDE821"
+        "type": "prometheus"
       },
       "gridPos": {
         "h": 1,
@@ -1764,29 +1619,7 @@
             ]
           },
           "unit": "short"
-        },
-        "overrides": [
-          {
-            "matcher": {
-              "id": "byValue",
-              "options": {
-                "op": "gte",
-                "reducer": "allIsNull",
-                "value": 0
-              }
-            },
-            "properties": [
-              {
-                "id": "custom.hideFrom",
-                "value": {
-                  "legend": true,
-                  "tooltip": true,
-                  "viz": false
-                }
-              }
-            ]
-          }
-        ]
+        }
       },
       "gridPos": {
         "h": 9,
