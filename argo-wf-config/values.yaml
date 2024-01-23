@@ -20,14 +20,17 @@ grafana:
 
     - name: argo-metrics
       folder: "Argo Workflows"
+      datasource: "DS_PROMETHEUS"
       path: "dashboards/ARGO-Metrics.json"
       
     - name: argoworkflow-metrics
       folder: "Argo Workflows"
+      datasource: "DS_PROMETHEUS"
       path: "dashboards/ArgoWorkflow-metrics.json"
 
     - name: tim-collins-update
-      folder: "Final Workflows Dashboard"
+      folder: "Argo Workflows"
+      datasource: "DS_THANOS"
       path: "dashboards/tim-collins-update.json"
 
 rbac:

@@ -15,7 +15,7 @@ spec:
       dashboards: {{ $.Values.grafana.name }}
   folder: {{ $dashboard.folder }}
   datasources:
-    - inputName: "DS_PROMETHEUS"
+    - inputName: {{ $dashboard.datasource | quote }}
       datasourceName: "Prometheus"
   json: |-
 {{ $.Files.Get $dashboard.path  | indent 4 }}
