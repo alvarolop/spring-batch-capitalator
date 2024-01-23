@@ -2,14 +2,14 @@
 apiVersion: argoproj.io/v1alpha1
 kind: Application
 metadata:
-  name: argowf
+  name: argo-wf-config
   namespace: gitops
 spec:
   destination:
     server: 'https://kubernetes.default.svc'
     namespace: argo-workflows
   source:
-    path: argo-workflows/argo-wf-config
+    path: argo-wf-config
     repoURL: https://github.com/alvarolop/spring-batch-capitalator.git
     targetRevision: main
     helm:

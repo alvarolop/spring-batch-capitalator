@@ -2,13 +2,13 @@
 apiVersion: argoproj.io/v1alpha1
 kind: Application
 metadata:
-  name: capitalator-wf
+  name: argo-wf-workflows
   namespace: gitops
 spec:
   destination:
     server: 'https://kubernetes.default.svc'
   source:
-    path: capitalator-wf
+    path: argo-wf-workflows
     repoURL: https://github.com/alvarolop/spring-batch-capitalator.git
     targetRevision: main
   project: default
