@@ -6,6 +6,11 @@ global:
   createNamespaces:
     - app01-workflows
     - app02-workflows
+  createGroups:
+    - name: app01-wf-admins
+      user: user1
+    - name: app01-wf-viewers
+      user: user2
   
 grafana:
   name: grafana
@@ -20,6 +25,10 @@ grafana:
     - name: argoworkflow-metrics
       folder: "Argo Workflows"
       path: "dashboards/ArgoWorkflow-metrics.json"
+
+    - name: tim-collins-update
+      folder: "Final Workflows Dashboard"
+      path: "dashboards/tim-collins-update.json"
 
 rbac:
   # Users will be assigned ONLY one SA based on the first rule that matches the groups of the user.

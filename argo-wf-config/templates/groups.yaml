@@ -1,0 +1,11 @@
+{{- if $.Values.global.createGroups }}
+{{- range $ns := $.Values.global.createGroups }}
+---
+apiVersion: user.openshift.io/v1
+kind: Group
+metadata:
+  name: {{ $group.name }}
+users:
+  - {{ $group.user }}
+{{- end }}
+{{- end }}
