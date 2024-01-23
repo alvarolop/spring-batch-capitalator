@@ -1,5 +1,7 @@
 dex:
+  # -- Boolean to enable the Chart dependency
   enabled: true
+  
   name: dex
   replicaCount: 1
 

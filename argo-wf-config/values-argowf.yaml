@@ -1,5 +1,10 @@
 argo-workflows:
+  # -- Boolean to enable the Chart dependency
   enabled: true
+
+  # -- String to fully override "argo-workflows.fullname" template
+  fullnameOverride: argowf
+
   workflow:
     serviceAccount:
       # -- Specifies whether a service account should be created
