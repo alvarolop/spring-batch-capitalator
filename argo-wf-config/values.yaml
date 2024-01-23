@@ -18,7 +18,7 @@ grafana:
   app: argo-workflows
   dashboards:
 
-    - name: argo-metrics
+    - name: 14136-argo-metrics
       folder: "Argo Workflows"
       datasource: "DS_PROMETHEUS"
       path: "dashboards/ARGO-Metrics.json"
