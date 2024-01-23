@@ -2,8 +2,8 @@
 kind: Secret
 apiVersion: v1
 metadata:
-  name: {{ $.Values.dex.name }}-sa-token
+  name: {{ $.Values.dex.fullnameOverride }}-sa-token
   namespace: {{ $.Values.dex.namespace | default $.Values.global.namespace }}
   annotations:
-    kubernetes.io/service-account.name: {{ $.Values.dex.name }}
+    kubernetes.io/service-account.name: {{ $.Values.dex.fullnameOverride }}
 type: kubernetes.io/service-account-token

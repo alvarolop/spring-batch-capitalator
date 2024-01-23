@@ -3,7 +3,7 @@ dex:
   enabled: true
 
   # -- A name to substitute for the full names of resources.
-  fullnameOverride: dex
+  fullnameOverride: "dex"
 
   # -- Number of replicas (pods) to launch.
   replicaCount: 1

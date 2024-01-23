@@ -2,7 +2,7 @@
 apiVersion: route.openshift.io/v1
 kind: Route
 metadata:
-  name: {{ $.Values.dex.name }}
+  name: {{ $.Values.dex.fullnameOverride }}
   namespace: {{ $.Values.dex.namespace | default $.Values.global.namespace }}
 spec:
   port:
