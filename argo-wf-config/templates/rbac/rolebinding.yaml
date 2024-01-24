@@ -19,7 +19,7 @@ subjects:
 apiVersion: rbac.authorization.k8s.io/v1
 kind: RoleBinding
 metadata:
-  name: {{ $.Values.global.name }}-{{ $.Values.global.namespace }}-view-{{ $rbac.group }}
+  name: {{ $.Values.global.name }}-{{ $.Values.global.namespace }}-cluster-view-{{ $rbac.group }}
   namespace: {{ $ns }}
 roleRef:
   name: view
