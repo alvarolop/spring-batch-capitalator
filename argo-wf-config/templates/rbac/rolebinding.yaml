@@ -8,7 +8,7 @@ metadata:
   name: {{ $.Values.global.name }}-{{ $.Values.global.namespace }}-{{ $rbac.role }}-{{ $rbac.group }}
   namespace: {{ $ns }}
 roleRef:
-  name: {{ $.Values.argo-workflows.fullnameOverride }}-{{ $rbac.role }}
+  name: {{ $.Values.global.name }}-{{ $rbac.role }}
   apiGroup: rbac.authorization.k8s.io
   kind: ClusterRole
 subjects:
