@@ -6,7 +6,7 @@ kind: ClusterRoleBinding
 metadata:
   name: {{ $.Values.global.name }}-{{ $.Values.global.namespace }}-{{ $rbac.role }}-{{ $rbac.group }}
 roleRef:
-  name: {{ $.Values.global.name }}-argo-workflows-{{ $rbac.role }}
+  name: {{ $.Values.argo-workflows.fullnameOverride }}-{{ $rbac.role }}
   apiGroup: rbac.authorization.k8s.io
   kind: ClusterRole
 subjects:
