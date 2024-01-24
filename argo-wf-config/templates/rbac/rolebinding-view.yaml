@@ -5,20 +5,6 @@
 apiVersion: rbac.authorization.k8s.io/v1
 kind: RoleBinding
 metadata:
-  name: {{ $.Values.global.name }}-{{ $.Values.global.namespace }}-{{ $rbac.role }}-{{ $rbac.group }}
-  namespace: {{ $ns }}
-roleRef:
-  name: {{ $.Values.global.name }}-{{ $rbac.role }}
-  apiGroup: rbac.authorization.k8s.io
-  kind: ClusterRole
-subjects:
-- kind: ServiceAccount
-  name: {{ $.Values.global.name }}-{{ $rbac.group }}
-  namespace: {{ $.Values.global.namespace }}
----
-apiVersion: rbac.authorization.k8s.io/v1
-kind: RoleBinding
-metadata:
   name: {{ $.Values.global.name }}-{{ $.Values.global.namespace }}-cluster-view-{{ $rbac.group }}
   namespace: {{ $ns }}
 roleRef:
