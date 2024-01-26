@@ -219,15 +219,29 @@ oc apply -f db-postgresql/
 
 === Metrics
 
-Argo emits a certain number of controller metrics that inform on the state of the controller at any given time. Then you can configure a Grafana Dashboard to easily control those. I already enabled metrics by default in the current `values-argowf.yaml`, so the official Helm Chart already creates a ServiceMonitor to collect metrics using the OCP Monitoring operator. 
+NOTE: *All the metrics from Argo WF are prefixed by `argo_workflows_`.*
 
-Then, regarding the metrics visualization, I've explored the available Dashboards in `grafana.com` and added these two to the chart:
+Argo WF emits a certain number of controller metrics that inform on the state of the controller at any given time. Then you can configure a Grafana Dashboard to easily control those. I already enabled metrics by default in the current `values-argowf.yaml`, so the official Helm Chart already creates a ServiceMonitor to collect metrics using the OCP Monitoring operator. 
+
+Then, regarding the metrics visualization, I've explored the available Dashboards in `grafana.com` and added these three to the chart:
 
 * https://grafana.com/grafana/dashboards/13927-argoworkflow-metrics/?src=worldping_rt[ArgoWorkflow Metrics].
 * https://grafana.com/grafana/dashboards/14136-argo-metrics/[Argo Metrics].
+* https://grafana.com/grafana/dashboards/20348-argo-workflows-metrics[Argo Workflows Metrics].
+
 
 
 TIP: For a full comprehensive explanation of Argo Workflows metrics, you can check the https://argo-workflows.readthedocs.io/en/latest/metrics/[official documentation].
+
+
+==== Dex metrics
+
+Also, we would like to evaluate and show metrics about the Dex IdP. It seems that the metrics exposed are not that extensive, but at least we can enable them for basic debugging:
+
+* The Dex Helm Chart already provides an easy configuration to collect metrics from Dex: https://github.com/dexidp/helm-charts/blob/master/charts/dex/values.yaml#L214
+* I didn't find any documentation about available metrics, but this could be a good summary: https://github.com/sighupio/fury-kubernetes-auth/issues/16
+* As of today, there is no public existing Grafana Dashboard for Dex.
+
 
 
 

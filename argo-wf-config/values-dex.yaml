@@ -99,6 +99,9 @@ dex:
       cpu: 500m
       memory: 256Mi
 
+  serviceMonitor:
+    enabled: true
+
   strategy:
     type: RollingUpdate
     rollingUpdate:
