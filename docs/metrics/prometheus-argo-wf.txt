@@ -1,0 +1,130 @@
+# HELP argo_workflows_count Number of Workflows currently accessible by the controller by status (refreshed every 15s)
+# TYPE argo_workflows_count gauge
+argo_workflows_count{status="Error"} 0
+argo_workflows_count{status="Failed"} 0
+argo_workflows_count{status="Pending"} 0
+argo_workflows_count{status="Running"} 0
+argo_workflows_count{status="Succeeded"} 11
+# HELP argo_workflows_error_count Number of errors encountered by the controller by cause
+# TYPE argo_workflows_error_count counter
+argo_workflows_error_count{cause="CronWorkflowSpecError"} 1
+argo_workflows_error_count{cause="CronWorkflowSubmissionError"} 0
+argo_workflows_error_count{cause="OperationPanic"} 0
+# HELP argo_workflows_k8s_request_total Number of kubernetes requests executed. https://argo-workflows.readthedocs.io/en/release-3.5/metrics/#argo_workflows_k8s_request_total
+# TYPE argo_workflows_k8s_request_total counter
+argo_workflows_k8s_request_total{kind="clusterworkflowtemplates",status_code="200",verb="Get"} 2655
+argo_workflows_k8s_request_total{kind="clusterworkflowtemplates",status_code="200",verb="List"} 1
+argo_workflows_k8s_request_total{kind="clusterworkflowtemplates",status_code="200",verb="Watch"} 587
+argo_workflows_k8s_request_total{kind="configmaps",status_code="200",verb="Get"} 53
+argo_workflows_k8s_request_total{kind="configmaps",status_code="200",verb="List"} 1
+argo_workflows_k8s_request_total{kind="configmaps",status_code="200",verb="Watch"} 648
+argo_workflows_k8s_request_total{kind="configmaps",status_code="404",verb="Get"} 593
+argo_workflows_k8s_request_total{kind="cronworkflows",status_code="200",verb="List"} 2
+argo_workflows_k8s_request_total{kind="cronworkflows",status_code="200",verb="Patch"} 1176
+argo_workflows_k8s_request_total{kind="cronworkflows",status_code="200",verb="Watch"} 598
+argo_workflows_k8s_request_total{kind="events",status_code="201",verb="Create"} 7117
+argo_workflows_k8s_request_total{kind="leases",status_code="200",verb="Get"} 53023
+argo_workflows_k8s_request_total{kind="leases",status_code="200",verb="Update"} 53023
+argo_workflows_k8s_request_total{kind="leases",status_code="201",verb="Create"} 1
+argo_workflows_k8s_request_total{kind="leases",status_code="404",verb="Get"} 1
+argo_workflows_k8s_request_total{kind="pods",status_code="200",verb="List"} 1
+argo_workflows_k8s_request_total{kind="pods",status_code="200",verb="Patch"} 2372
+argo_workflows_k8s_request_total{kind="pods",status_code="200",verb="Watch"} 599
+argo_workflows_k8s_request_total{kind="pods",status_code="201",verb="Create"} 2372
+argo_workflows_k8s_request_total{kind="pods",status_code="404",verb="Delete"} 593
+argo_workflows_k8s_request_total{kind="pods/exec",status_code="500",verb="Create"} 12
+argo_workflows_k8s_request_total{kind="selfsubjectaccessreviews",status_code="201",verb="Create"} 3
+argo_workflows_k8s_request_total{kind="workflowartifactgctasks",status_code="200",verb="List"} 2
+argo_workflows_k8s_request_total{kind="workflowartifactgctasks",status_code="200",verb="Watch"} 598
+argo_workflows_k8s_request_total{kind="workflows",status_code="200",verb="Delete"} 582
+argo_workflows_k8s_request_total{kind="workflows",status_code="200",verb="List"} 5
+argo_workflows_k8s_request_total{kind="workflows",status_code="200",verb="Update"} 3034
+argo_workflows_k8s_request_total{kind="workflows",status_code="200",verb="Watch"} 1192
+argo_workflows_k8s_request_total{kind="workflows",status_code="201",verb="Create"} 588
+argo_workflows_k8s_request_total{kind="workflowtaskresults",status_code="200",verb="DeleteCollection"} 593
+argo_workflows_k8s_request_total{kind="workflowtaskresults",status_code="200",verb="List"} 1
+argo_workflows_k8s_request_total{kind="workflowtaskresults",status_code="200",verb="Watch"} 601
+argo_workflows_k8s_request_total{kind="workflowtasksets",status_code="200",verb="List"} 2
+argo_workflows_k8s_request_total{kind="workflowtasksets",status_code="200",verb="Watch"} 596
+argo_workflows_k8s_request_total{kind="workflowtemplates",status_code="200",verb="Get"} 2657
+argo_workflows_k8s_request_total{kind="workflowtemplates",status_code="200",verb="List"} 1
+argo_workflows_k8s_request_total{kind="workflowtemplates",status_code="200",verb="Watch"} 594
+# HELP argo_workflows_operation_duration_seconds Histogram of durations of operations
+# TYPE argo_workflows_operation_duration_seconds histogram
+argo_workflows_operation_duration_seconds_bucket{le="5"} 3034
+argo_workflows_operation_duration_seconds_bucket{le="10"} 3034
+argo_workflows_operation_duration_seconds_bucket{le="15"} 3034
+argo_workflows_operation_duration_seconds_bucket{le="20"} 3034
+argo_workflows_operation_duration_seconds_bucket{le="25"} 3034
+argo_workflows_operation_duration_seconds_bucket{le="30"} 3034
+argo_workflows_operation_duration_seconds_bucket{le="+Inf"} 3034
+argo_workflows_operation_duration_seconds_sum 110.98919273600008
+argo_workflows_operation_duration_seconds_count 3034
+# HELP argo_workflows_pods_count Number of Pods from Workflows currently accessible by the controller by status (refreshed every 15s)
+# TYPE argo_workflows_pods_count gauge
+argo_workflows_pods_count{status="Pending"} 0
+argo_workflows_pods_count{status="Running"} 0
+# HELP argo_workflows_queue_adds_count Adds to the queue
+# TYPE argo_workflows_queue_adds_count counter
+argo_workflows_queue_adds_count{queue_name="cron_wf_queue"} 1620
+argo_workflows_queue_adds_count{queue_name="pod_cleanup_queue"} 3101
+argo_workflows_queue_adds_count{queue_name="workflow_queue"} 3627
+argo_workflows_queue_adds_count{queue_name="workflow_ttl_queue"} 0
+# HELP argo_workflows_queue_depth_count Depth of the queue
+# TYPE argo_workflows_queue_depth_count gauge
+argo_workflows_queue_depth_count{queue_name="cron_wf_queue"} 0
+argo_workflows_queue_depth_count{queue_name="pod_cleanup_queue"} 0
+argo_workflows_queue_depth_count{queue_name="workflow_queue"} 0
+argo_workflows_queue_depth_count{queue_name="workflow_ttl_queue"} 0
+# HELP argo_workflows_queue_latency Time objects spend waiting in the queue
+# TYPE argo_workflows_queue_latency histogram
+argo_workflows_queue_latency_bucket{queue_name="cron_wf_queue",le="1"} 1620
+argo_workflows_queue_latency_bucket{queue_name="cron_wf_queue",le="5"} 1620
+argo_workflows_queue_latency_bucket{queue_name="cron_wf_queue",le="20"} 1620
+argo_workflows_queue_latency_bucket{queue_name="cron_wf_queue",le="60"} 1620
+argo_workflows_queue_latency_bucket{queue_name="cron_wf_queue",le="180"} 1620
+argo_workflows_queue_latency_bucket{queue_name="cron_wf_queue",le="+Inf"} 1620
+argo_workflows_queue_latency_sum{queue_name="cron_wf_queue"} 0.029993718999999964
+argo_workflows_queue_latency_count{queue_name="cron_wf_queue"} 1620
+argo_workflows_queue_latency_bucket{queue_name="pod_cleanup_queue",le="1"} 3101
+argo_workflows_queue_latency_bucket{queue_name="pod_cleanup_queue",le="5"} 3101
+argo_workflows_queue_latency_bucket{queue_name="pod_cleanup_queue",le="20"} 3101
+argo_workflows_queue_latency_bucket{queue_name="pod_cleanup_queue",le="60"} 3101
+argo_workflows_queue_latency_bucket{queue_name="pod_cleanup_queue",le="180"} 3101
+argo_workflows_queue_latency_bucket{queue_name="pod_cleanup_queue",le="+Inf"} 3101
+argo_workflows_queue_latency_sum{queue_name="pod_cleanup_queue"} 0.03779446200000009
+argo_workflows_queue_latency_count{queue_name="pod_cleanup_queue"} 3101
+argo_workflows_queue_latency_bucket{queue_name="workflow_queue",le="1"} 3627
+argo_workflows_queue_latency_bucket{queue_name="workflow_queue",le="5"} 3627
+argo_workflows_queue_latency_bucket{queue_name="workflow_queue",le="20"} 3627
+argo_workflows_queue_latency_bucket{queue_name="workflow_queue",le="60"} 3627
+argo_workflows_queue_latency_bucket{queue_name="workflow_queue",le="180"} 3627
+argo_workflows_queue_latency_bucket{queue_name="workflow_queue",le="+Inf"} 3627
+argo_workflows_queue_latency_sum{queue_name="workflow_queue"} 0.08587139599999986
+argo_workflows_queue_latency_count{queue_name="workflow_queue"} 3627
+argo_workflows_queue_latency_bucket{queue_name="workflow_ttl_queue",le="1"} 0
+argo_workflows_queue_latency_bucket{queue_name="workflow_ttl_queue",le="5"} 0
+argo_workflows_queue_latency_bucket{queue_name="workflow_ttl_queue",le="20"} 0
+argo_workflows_queue_latency_bucket{queue_name="workflow_ttl_queue",le="60"} 0
+argo_workflows_queue_latency_bucket{queue_name="workflow_ttl_queue",le="180"} 0
+argo_workflows_queue_latency_bucket{queue_name="workflow_ttl_queue",le="+Inf"} 0
+argo_workflows_queue_latency_sum{queue_name="workflow_ttl_queue"} 0
+argo_workflows_queue_latency_count{queue_name="workflow_ttl_queue"} 0
+# HELP argo_workflows_workers_busy_count Number of workers currently busy
+# TYPE argo_workflows_workers_busy_count gauge
+argo_workflows_workers_busy_count{worker_type="cron_wf_queue"} 0
+argo_workflows_workers_busy_count{worker_type="pod_cleanup_queue"} 0
+argo_workflows_workers_busy_count{worker_type="workflow_queue"} 0
+argo_workflows_workers_busy_count{worker_type="workflow_ttl_queue"} 0
+# HELP argo_workflows_workflow_condition Workflow condition. https://argo-workflows.readthedocs.io/en/release-3.5/metrics/#argo_workflows_workflow_condition
+# TYPE argo_workflows_workflow_condition gauge
+argo_workflows_workflow_condition{status="False",type="PodRunning"} 11
+argo_workflows_workflow_condition{status="True",type="PodRunning"} 0
+# HELP argo_workflows_workflows_processed_count Number of workflow updates processed
+# TYPE argo_workflows_workflows_processed_count counter
+argo_workflows_workflows_processed_count 0
+# HELP log_messages Total number of log messages.
+# TYPE log_messages counter
+log_messages{level="error"} 2
+log_messages{level="info"} 47744
+log_messages{level="warning"} 21370

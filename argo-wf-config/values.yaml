@@ -33,6 +33,11 @@ grafana:
       datasource: "DS_THANOS"
       path: "dashboards/20348-argo-workflows-metrics.json"
 
+    - name: custom-dex-metrics
+      folder: "Argo Workflows"
+      datasource: "DS_THANOS"
+      path: "dashboards/custom-dex-metrics.json"
+
 rbac:
   # Users will be assigned ONLY one SA based on the first rule that matches the groups of the user.
   # Please, make sure to follow the correct order of precedence.
