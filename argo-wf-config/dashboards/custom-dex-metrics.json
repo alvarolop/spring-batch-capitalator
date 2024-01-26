@@ -528,7 +528,8 @@
   ],
   "refresh": "5s",
   "tags": [
-    "dex, argo"
+    "argo",
+    "dex"
   ],
   "templating": {
     "list": [
